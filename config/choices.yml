@@ -1,0 +1,6 @@
+# Don't use tabs, only spaces.  YAML will yell.
+
+user_type:
+    - Player
+    - Coach
+    - Admin	
