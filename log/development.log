@@ -1058,3 +1058,5 @@ Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-10-29 03:43:15 -0500
 
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-10-29 03:43:15 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (2.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (2.4ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"

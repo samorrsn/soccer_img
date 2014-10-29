@@ -1,5 +1,9 @@
 STM::Application.routes.draw do
 
+  get "team/profile"
+  get "team/schedule"
+  get "team/players"
+  get "team/positions"
   resources :users
 
   root "static_pages#home"
