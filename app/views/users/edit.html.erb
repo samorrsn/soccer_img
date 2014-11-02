@@ -10,13 +10,39 @@
       <%= f.text_field :firstName %>
 
       <%= f.Lastname :lastName %>
-      <%= f.text_field :lacstName %>
+      <%= f.text_field :lastName %>
 
       <%= f.label :email %>
       <%= f.text_field :email %>
 
+      <%= f.label :phone %>
+      <%= f.text_field :phone %>
+
+      <%= f.label :address %>
+      <%= f.text_field :address %>
+
+      <%= f.label :city %>
+      <%= f.text_field :city %>
+
+      <%= f.label :state %>
+      <%= f.text_field :state %>
+
+      <%= f.label :zip %>
+      <%= f.text_field :zip %>
+
+      <%= f.label :primaryPosition %>
+      <%= f.text_field :primaryPosition %>      
+
+      <%= f.label :secondaryPosition %>
+      <%= f.text_field :secondaryPosition %>  
+
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
+
+    <div class="gravatar_edit">
+      <%= gravatar_for @user %>
+      <a href="http://gravatar.com/emails">change</a>
+    </div>
   </div>
 </div>
 

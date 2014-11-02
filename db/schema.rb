@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20141029094747) do
 
   create_table "positions", force: true do |t|
-    t.string   "name"
+    t.string   "title"
     t.integer  "user_id"
     t.integer  "team_id"
     t.datetime "created_at"

@@ -5,7 +5,7 @@ describe "users/edit" do
     @user = assign(:user, stub_model(User,
       :firstName => "MyString",
       :lastName => "MyString",
-      :email => "MyString"
+      :email => "MyString",
     ))
   end
 

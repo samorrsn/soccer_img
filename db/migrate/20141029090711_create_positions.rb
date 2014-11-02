@@ -1,7 +1,7 @@
 class CreatePositions < ActiveRecord::Migration
   def change
     create_table :positions do |t|
-      t.string :name
+      t.string :title
       t.belongs_to :player
       t.belongs_to :team
 
