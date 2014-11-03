@@ -1,3 +1,4 @@
 class Team < ActiveRecord::Base
-    has_one :user
+    attr_accessor :name, :mascot
+    validates :name, :mascot, presence: true
 end

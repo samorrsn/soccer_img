@@ -6,20 +6,29 @@
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.Firstname :firstName %>
+      <!-- <%= f.Firstname :firstName %>
       <%= f.text_field :firstName %>
 
       <%= f.Lastname :lastName %>
-      <%= f.text_field :lastName %>
+      <%= f.text_field :lastName %> -->
+
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+
+      <%= f.label :password %>
+      <%= f.text_field :password %>
 
       <%= f.label :email %>
       <%= f.text_field :email %>
 
-      <%= f.label :phone %>
-      <%= f.text_field :phone %>
+      <%= f.label :phone_number %>
+      <%= f.text_field :phone_number %>
 
-      <%= f.label :address %>
-      <%= f.text_field :address %>
+      <%= f.label :street_address %>
+      <%= f.text_field :street_address %>
 
       <%= f.label :city %>
       <%= f.text_field :city %>
@@ -27,14 +36,14 @@
       <%= f.label :state %>
       <%= f.text_field :state %>
 
-      <%= f.label :zip %>
-      <%= f.text_field :zip %>
+      <%= f.label :zipcode %>
+      <%= f.text_field :zipcode %>
 
-      <%= f.label :primaryPosition %>
-      <%= f.text_field :primaryPosition %>      
+      <!-- <%= f.label :primaryPosition %>
+      <%= f.text_field :primaryPosition %>
 
       <%= f.label :secondaryPosition %>
-      <%= f.text_field :secondaryPosition %>  
+      <%= f.text_field :secondaryPosition %> -->
 
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
