@@ -1,5 +1,6 @@
 STM::Application.routes.draw do
 
+  get "statistics/index"
   get "team/profile"
   get "team/schedule"
   get "team/players"
