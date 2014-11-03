@@ -1,10 +1,7 @@
 STM::Application.routes.draw do
 
-<<<<<<< HEAD
   get "calendar/index"
-=======
   get "statistics/index"
->>>>>>> TrackGameStats
   get "team/profile"
   get "team/schedule"
   get "team/players"
