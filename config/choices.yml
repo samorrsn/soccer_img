@@ -8,3 +8,9 @@ user_type:
     #- coach
     - admin
     - member
+
+visibility:
+    - private
+    - coach
+    - player
+    - public

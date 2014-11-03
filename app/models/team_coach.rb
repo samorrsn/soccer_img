@@ -1,0 +1,2 @@
+class TeamCoach < TeamMember
+end
