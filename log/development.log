@@ -1248,3 +1248,28 @@ Migrating to CreateTeamMembers (20141103104721)
   [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141103104721"]]
   [1m[36m (245.0ms)[0m  [1mcommit transaction[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to ChangePostitionsTableToReferenceTeamMember (20141103105308)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "positions" ADD "team_member_id" integer[0m
+  [1m[35m (0.3ms)[0m  CREATE TEMPORARY TABLE "apositions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "position_name" varchar(255), "user_id" integer, "team_id" integer, "created_at" datetime, "updated_at" datetime, "team_member_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "positions"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "positions"
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "position_name" varchar(255), "user_id" integer, "team_id" integer, "created_at" datetime, "updated_at" datetime, "team_member_id" integer) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "apositions"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "apositions"[0m
+  [1m[35m (0.1ms)[0m  CREATE TEMPORARY TABLE "apositions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "position_name" varchar(255), "user_id" integer, "team_id" integer, "created_at" datetime, "updated_at" datetime, "team_member_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "positions"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "positions"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "position_name" varchar(255), "team_id" integer, "created_at" datetime, "updated_at" datetime, "team_member_id" integer) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "apositions"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "apositions"[0m
+  [1m[35m (0.1ms)[0m  CREATE TEMPORARY TABLE "apositions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "position_name" varchar(255), "team_id" integer, "created_at" datetime, "updated_at" datetime, "team_member_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "positions"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "positions"
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "position_name" varchar(255), "created_at" datetime, "updated_at" datetime, "team_member_id" integer) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "apositions"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "apositions"[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141103105308"]]
+  [1m[36m (231.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
