@@ -1,4 +1,6 @@
 class TeamMember < ActiveRecord::Base
-    attr_accessor :display_name
-    validates :display_name presence: true
+	belongs_to :user
+	belongs_to :team
+	has_many :player_positions
+	has_many :positions, through: :player_positions
 end

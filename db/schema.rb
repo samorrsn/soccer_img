@@ -11,20 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103105308) do
+ActiveRecord::Schema.define(version: 20141103170812) do
 
-  create_table "positions", force: true do |t|
-    t.string   "position_name"
+  create_table "player_positions", force: true do |t|
+    t.integer  "team_member_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "team_member_id"
+    t.integer  "position_id"
+  end
+
+  add_index "player_positions", ["position_id", "team_member_id"], name: "index_player_positions_on_position_id_and_team_member_id", unique: true
+
+  create_table "positions", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "statistics", force: true do |t|
+    t.integer  "goals"
+    t.integer  "assists"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "team_members", force: true do |t|
-    t.string   "display_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "team_id"
+    t.integer  "user_id"
+    t.boolean  "is_coach"
   end
+
+  add_index "team_members", ["team_id", "user_id"], name: "index_team_members_on_team_id_and_user_id", unique: true
 
   create_table "teams", force: true do |t|
     t.string   "name"

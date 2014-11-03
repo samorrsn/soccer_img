@@ -3710,3 +3710,1275 @@ Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 00:05:53 -0600
 
 
 Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 00:05:53 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateStatistics (20141103160854)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "statistics" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "goals" integer, "assists" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141103160854"]]
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+Migrating to UpdateTeamMembers (20141103162712)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to UpdateTeamMembers (20141103162712)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "team_members" ADD "team_id" integer[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "team_members" ADD "user_id" integer
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_team_members_on_team_id_and_user_id" ON "team_members" ("team_id", "user_id")[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to UpdateTeamMembers (20141103162712)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "team_members" ADD "team_id" integer[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "team_members" ADD "user_id" integer
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_team_members_on_team_id_and_user_id" ON "team_members" ("team_id", "user_id")[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "ateam_members" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "display_name" varchar(255), "created_at" datetime, "updated_at" datetime, "team_id" integer, "user_id" integer) 
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "tindex_ateam_members_on_team_id_and_user_id" ON "ateam_members" ("team_id", "user_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "team_members"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "team_members"[0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "team_members" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "team_id" integer, "user_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mCREATE UNIQUE INDEX "index_team_members_on_team_id_and_user_id" ON "team_members" ("team_id", "user_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "ateam_members"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "ateam_members"[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141103162712"]]
+  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePlayerPositions (20141103162826)
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "player_positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "team_member_id" integer, "team_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141103162826"]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddIndexesToPlayerPositions (20141103163228)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mCREATE UNIQUE INDEX "index_player_positions_on_position_id_and_team_member_id" ON "player_positions" ("position_id", "team_member_id")[0m
+SQLite3::SQLException: table player_positions has no column named position_id: CREATE UNIQUE INDEX "index_player_positions_on_position_id_and_team_member_id" ON "player_positions" ("position_id", "team_member_id")
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddIndexesToPlayerPositions (20141103163228)
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddIndexesToPlayerPositions (20141103163228)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TEMPORARY TABLE "aplayer_positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "team_member_id" integer, "team_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "player_positions"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "player_positions"[0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "player_positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "team_member_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mSELECT * FROM "aplayer_positions"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "aplayer_positions"
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "player_positions" ADD "position_id" integer[0m
+  [1m[35m (0.5ms)[0m  CREATE UNIQUE INDEX "index_player_positions_on_position_id_and_team_member_id" ON "player_positions" ("position_id", "team_member_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141103163228"]]
+  [1m[35m (4.3ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddIsCoachToTeamMember (20141103163900)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "team_members" ADD "is_coach" boolean[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141103163900"]]
+  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (43.8ms)[0m  INSERT INTO "teams" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", Mon, 03 Nov 2014 16:42:21 UTC +00:00], ["updated_at", Mon, 03 Nov 2014 16:42:21 UTC +00:00]]
+  [1m[36m (2.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RemoveUserTypeColumnFromUsers (20141103164444)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RemoveUserTypeColumnFromUsers (20141103164444)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TEMPORARY TABLE "ausers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime, "user_type" text, "password" varchar(255), "phone_number" varchar(255), "street_address" varchar(255), "city" varchar(255), "state" varchar(255), "zipcode" integer) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "users"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime, "password" varchar(255), "phone_number" varchar(255), "street_address" varchar(255), "city" varchar(255), "state" varchar(255), "zipcode" integer) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "ausers"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "ausers"
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "is_admin" boolean[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141103164444"]]
+  [1m[36m (5.2ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (5.0ms)[0m  [1mCREATE TABLE "player_positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "team_member_id" integer, "created_at" datetime, "updated_at" datetime, "position_id" integer) [0m
+  [1m[35m (5.2ms)[0m  CREATE UNIQUE INDEX "index_player_positions_on_position_id_and_team_member_id" ON "player_positions" ("position_id", "team_member_id")
+  [1m[36m (4.0ms)[0m  [1mCREATE TABLE "positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "position_name" varchar(255), "created_at" datetime, "updated_at" datetime, "team_member_id" integer) [0m
+  [1m[35m (4.9ms)[0m  CREATE TABLE "statistics" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "goals" integer, "assists" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (3.0ms)[0m  [1mCREATE TABLE "team_members" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "team_id" integer, "user_id" integer, "is_coach" boolean) [0m
+  [1m[35m (4.8ms)[0m  CREATE UNIQUE INDEX "index_team_members_on_team_id_and_user_id" ON "team_members" ("team_id", "user_id")
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "teams" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "mascot" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (2.8ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime, "password" varchar(255), "phone_number" varchar(255), "street_address" varchar(255), "city" varchar(255), "state" varchar(255), "zipcode" integer, "is_admin" boolean) 
+  [1m[36m (2.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (2.3ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (2.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141103164444')
+  [1m[36m (2.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141028012653')[0m
+  [1m[35m (3.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141103162712')
+  [1m[36m (4.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141103162826')[0m
+  [1m[35m (2.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141103163900')
+  [1m[36m (1.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141029091817')[0m
+  [1m[35m (3.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141103160854')
+  [1m[36m (2.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141103105308')[0m
+  [1m[35m (2.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141103163228')
+  [1m[36m (3.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141103104721')[0m
+  [1m[35m (3.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141029090711')
+  [1m[36m (1.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141103052814')[0m
+  [1m[35m (2.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141028012444')
+  [1m[36m (2.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141029094747')[0m
+  [1m[35m (9.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141029083842')
+  [1m[36m (2.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141027212118')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (4.6ms)[0m  [1mCREATE TABLE "player_positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "team_member_id" integer, "created_at" datetime, "updated_at" datetime, "position_id" integer) [0m
+  [1m[35m (2.4ms)[0m  CREATE UNIQUE INDEX "index_player_positions_on_position_id_and_team_member_id" ON "player_positions" ("position_id", "team_member_id")
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "position_name" varchar(255), "created_at" datetime, "updated_at" datetime, "team_member_id" integer) [0m
+  [1m[35m (2.5ms)[0m  CREATE TABLE "statistics" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "goals" integer, "assists" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (8.2ms)[0m  [1mCREATE TABLE "team_members" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "team_id" integer, "user_id" integer, "is_coach" boolean) [0m
+  [1m[35m (2.5ms)[0m  CREATE UNIQUE INDEX "index_team_members_on_team_id_and_user_id" ON "team_members" ("team_id", "user_id")
+  [1m[36m (3.1ms)[0m  [1mCREATE TABLE "teams" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "mascot" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (4.1ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime, "password" varchar(255), "phone_number" varchar(255), "street_address" varchar(255), "city" varchar(255), "state" varchar(255), "zipcode" integer, "is_admin" boolean) 
+  [1m[36m (3.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (2.8ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (2.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141103164444')
+  [1m[36m (2.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141028012653')[0m
+  [1m[35m (4.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141103162712')
+  [1m[36m (2.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141103162826')[0m
+  [1m[35m (2.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141103163900')
+  [1m[36m (3.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141029091817')[0m
+  [1m[35m (4.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141103160854')
+  [1m[36m (3.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141103105308')[0m
+  [1m[35m (3.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141103163228')
+  [1m[36m (1.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141103104721')[0m
+  [1m[35m (3.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141029090711')
+  [1m[36m (3.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141103052814')[0m
+  [1m[35m (3.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141028012444')
+  [1m[36m (3.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141029094747')[0m
+  [1m[35m (1.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141029083842')
+  [1m[36m (7.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141027212118')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (2.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (2.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20141027212118)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "firstName" varchar(255), "lastName" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141027212118"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddUserTypeToUsers (20141028012444)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "user_type" text[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141028012444"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Migrating to FixColumnNames (20141028012653)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TEMPORARY TABLE "ausers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "lastName" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime, "user_type" text) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "users"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "lastName" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime, "user_type" text) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "ausers"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "ausers"
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "ausers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime, "user_type" text) [0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM "users"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime, "user_type" text) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "ausers"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "ausers"
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141028012653"]]
+  [1m[35m (2.7ms)[0m  commit transaction
+Migrating to CreateTeams (20141029083842)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "teams" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "mascot" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141029083842"]]
+  [1m[35m (3.9ms)[0m  commit transaction
+Migrating to CreatePositions (20141029090711)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "player_id" integer, "team_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141029090711"]]
+  [1m[35m (2.3ms)[0m  commit transaction
+Migrating to AddUserAndTeamRelationShips (20141029091817)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD "team_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141029091817"]]
+  [1m[35m (2.4ms)[0m  commit transaction
+Migrating to RenamePositionPlayerRelationShipToUser (20141029094747)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "apositions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "user_id" integer, "team_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "positions"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "positions"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "user_id" integer, "team_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "apositions"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "apositions"[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141029094747"]]
+  [1m[36m (4.6ms)[0m  [1mcommit transaction[0m
+Migrating to UpdateUserModel (20141103052814)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "password" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "phone_number" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "street_address" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "city" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "state" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "zipcode" integer
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "ausers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime, "user_type" text, "team_id" integer, "password" varchar(255), "phone_number" varchar(255), "street_address" varchar(255), "city" varchar(255), "state" varchar(255), "zipcode" integer) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "users"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime, "user_type" text, "password" varchar(255), "phone_number" varchar(255), "street_address" varchar(255), "city" varchar(255), "state" varchar(255), "zipcode" integer) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "ausers"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "ausers"
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141103052814"]]
+  [1m[35m (4.7ms)[0m  commit transaction
+Migrating to CreateTeamMembers (20141103104721)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "team_members" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "display_name" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141103104721"]]
+  [1m[35m (3.2ms)[0m  commit transaction
+Migrating to ChangePostitionsTableToReferenceTeamMember (20141103105308)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "positions" ADD "team_member_id" integer
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to ChangePostitionsTableToReferenceTeamMember (20141103105308)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "positions" ADD "team_member_id" integer[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to ChangePostitionsTableToReferenceTeamMember (20141103105308)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateStatistics (20141103160854)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "statistics" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "goals" integer, "assists" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141103160854"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Migrating to UpdateTeamMembers (20141103162712)
+  [1m[35m (2.8ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "team_members" ADD "team_id" integer[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "team_members" ADD "user_id" integer
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_team_members_on_team_id_and_user_id" ON "team_members" ("team_id", "user_id")[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "ateam_members" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "display_name" varchar(255), "created_at" datetime, "updated_at" datetime, "team_id" integer, "user_id" integer) 
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "tindex_ateam_members_on_team_id_and_user_id" ON "ateam_members" ("team_id", "user_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "team_members"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "team_members"[0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "team_members" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "team_id" integer, "user_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mCREATE UNIQUE INDEX "index_team_members_on_team_id_and_user_id" ON "team_members" ("team_id", "user_id")[0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM "ateam_members"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "ateam_members"[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141103162712"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePlayerPositions (20141103162826)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "player_positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "team_member_id" integer, "team_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141103162826"]]
+  [1m[36m (3.6ms)[0m  [1mcommit transaction[0m
+Migrating to AddIndexesToPlayerPositions (20141103163228)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "aplayer_positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "team_member_id" integer, "team_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "player_positions"
+  [1m[36m (0.5ms)[0m  [1mDROP TABLE "player_positions"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "player_positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "team_member_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "aplayer_positions"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "aplayer_positions"
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "player_positions" ADD "position_id" integer[0m
+  [1m[35m (0.2ms)[0m  CREATE UNIQUE INDEX "index_player_positions_on_position_id_and_team_member_id" ON "player_positions" ("position_id", "team_member_id")
+  [1m[36mSQL (1.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141103163228"]]
+  [1m[35m (2.6ms)[0m  commit transaction
+Migrating to AddIsCoachToTeamMember (20141103163900)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "team_members" ADD "is_coach" boolean
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141103163900"]]
+  [1m[35m (3.5ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.8ms)[0m  INSERT INTO "users" ("created_at", "first_name", "updated_at", "user_type") VALUES (?, ?, ?, ?)  [["created_at", Mon, 03 Nov 2014 16:58:18 UTC +00:00], ["first_name", "John"], ["updated_at", Mon, 03 Nov 2014 16:58:18 UTC +00:00], ["user_type", "admin"]]
+  [1m[36m (3.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "teams" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", Mon, 03 Nov 2014 16:59:19 UTC +00:00], ["updated_at", Mon, 03 Nov 2014 16:59:19 UTC +00:00]]
+  [1m[35m (3.2ms)[0m  commit transaction
+  [1m[36mTeam Load (0.1ms)[0m  [1mSELECT "teams".* FROM "teams" ORDER BY "teams"."id" DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "teams"
+  [1m[36mTeam Load (0.3ms)[0m  [1mSELECT "teams".* FROM "teams" ORDER BY "teams"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.4ms)[0m  INSERT INTO "teams" ("created_at", "mascot", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", Mon, 03 Nov 2014 17:04:53 UTC +00:00], ["mascot", "Tiger"], ["name", "Tigers"], ["updated_at", Mon, 03 Nov 2014 17:04:53 UTC +00:00]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT 1[0m
+  [1m[35mTeam Load (0.1ms)[0m  SELECT "teams".* FROM "teams" ORDER BY "teams"."id" DESC LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.2ms)[0m  INSERT INTO "team_members" ("created_at", "team_id", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Mon, 03 Nov 2014 17:06:55 UTC +00:00], ["team_id", 2], ["updated_at", Mon, 03 Nov 2014 17:06:55 UTC +00:00], ["user_id", 1]]
+  [1m[36m (4.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mTeam Load (0.2ms)[0m  SELECT "teams".* FROM "teams" INNER JOIN "team_members" ON "teams"."id" = "team_members"."team_id" WHERE "team_members"."user_id" = ?  [["user_id", 1]]
+  [1m[36mTeamMember Load (0.3ms)[0m  [1mSELECT "team_members".* FROM "team_members" WHERE "team_members"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RecreatePositionTable (20141103170812)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mDROP TABLE "positions"[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141103170812"]]
+  [1m[35m (3.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.8ms)[0m  INSERT INTO "positions" ("created_at", "title", "updated_at") VALUES (?, ?, ?)  [["created_at", Mon, 03 Nov 2014 17:09:31 UTC +00:00], ["title", "Goalie"], ["updated_at", Mon, 03 Nov 2014 17:09:31 UTC +00:00]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "positions" ("created_at", "title", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", Mon, 03 Nov 2014 17:10:01 UTC +00:00], ["title", "Forward"], ["updated_at", Mon, 03 Nov 2014 17:10:01 UTC +00:00]]
+  [1m[35m (4.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "positions" ("created_at", "title", "updated_at") VALUES (?, ?, ?)  [["created_at", Mon, 03 Nov 2014 17:10:10 UTC +00:00], ["title", "Defender"], ["updated_at", Mon, 03 Nov 2014 17:10:10 UTC +00:00]]
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT 1
+  [1m[36mTeamMember Load (1.8ms)[0m  [1mSELECT "team_members".* FROM "team_members" WHERE "team_members"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "player_positions" ("created_at", "position_id", "team_member_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Mon, 03 Nov 2014 17:10:50 UTC +00:00], ["position_id", 3], ["team_member_id", 1], ["updated_at", Mon, 03 Nov 2014 17:10:50 UTC +00:00]]
+  [1m[35m (3.4ms)[0m  commit transaction
+  [1m[36mPosition Load (0.2ms)[0m  [1mSELECT "positions".* FROM "positions" INNER JOIN "player_positions" ON "positions"."id" = "player_positions"."position_id" WHERE "player_positions"."team_member_id" = ?[0m  [["team_member_id", 1]]
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "player_positions" ("created_at", "position_id", "team_member_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Mon, 03 Nov 2014 17:11:27 UTC +00:00], ["position_id", 3], ["team_member_id", 1], ["updated_at", Mon, 03 Nov 2014 17:11:27 UTC +00:00]]
+SQLite3::ConstraintException: UNIQUE constraint failed: player_positions.position_id, player_positions.team_member_id: INSERT INTO "player_positions" ("created_at", "position_id", "team_member_id", "updated_at") VALUES (?, ?, ?, ?)
+  [1m[35m (0.1ms)[0m  rollback transaction
+
+
+Started GET "/users/" for 127.0.0.1 at 2014-11-03 11:13:14 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (15.3ms)
+Completed 500 Internal Server Error in 28ms
+
+ActionView::Template::Error (undefined method `firstName' for #<User:0x9902a3c>):
+    15:   <tbody>
+    16:     <% @users.each do |user| %>
+    17:       <tr>
+    18:         <td><%= user.firstName %></td>
+    19:         <td><%= user.lastName %></td>
+    20:         <td><%= user.email %></td>
+    21:         <td><%= link_to 'Show', user %></td>
+  app/views/users/index.html.erb:18:in `block in _app_views_users_index_html_erb__67489537_80193320'
+  app/views/users/index.html.erb:16:in `_app_views_users_index_html_erb__67489537_80193320'
+
+
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (10.3ms)
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (22.4ms)
+
+
+Started GET "/users/" for 127.0.0.1 at 2014-11-03 11:14:10 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (12.7ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (0.2ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 316ms (Views: 314.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/calendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/statistics.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/team.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/fullcalendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/calendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/statistics.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/team.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/moment.min.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:11 -0600
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:14:17 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  Rendered users/show.html.erb within layouts/application (1.8ms)
+Completed 500 Internal Server Error in 13ms
+
+ActionView::Template::Error (undefined method `firstName' for #<User:0x8c1692c>):
+    2: 
+    3: <p>
+    4:   <strong>Firstname:</strong>
+    5:   <%= @user.firstName %>
+    6: </p>
+    7: 
+    8: <p>
+  app/views/users/show.html.erb:5:in `_app_views_users_show_html_erb__280858489_73559520'
+
+
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.9ms)
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (11.5ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:14:17 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "1"]]
+  Rendered users/show.html.erb within layouts/application (1.6ms)
+Completed 500 Internal Server Error in 8ms
+
+ActionView::Template::Error (undefined method `firstName' for #<User:0x98e6d00>):
+    2: 
+    3: <p>
+    4:   <strong>Firstname:</strong>
+    5:   <%= @user.firstName %>
+    6: </p>
+    7: 
+    8: <p>
+  app/views/users/show.html.erb:5:in `_app_views_users_show_html_erb__280858489_80161220'
+
+
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.9ms)
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (13.6ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  Rendered users/show.html.erb within layouts/application (0.9ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 10ms (Views: 8.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/statistics.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/team.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/fullcalendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/calendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/calendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/statistics.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/team.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/moment.min.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 11:14:45 -0600
+
+
+Started GET "/users/" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (5.7ms)
+  Rendered layouts/_shim.html.erb (0.2ms)
+  Rendered layouts/_header.html.erb (0.2ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 51ms (Views: 50.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (1.6ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 11ms (Views: 9.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/calendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/statistics.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/team.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/fullcalendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/team.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/calendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/statistics.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:36 -0600
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:37 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:37 -0600
+
+
+Started GET "/assets/moment.min.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:37 -0600
+
+
+Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:37 -0600
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "1"]]
+  Rendered users/show.html.erb within layouts/application (0.9ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 25ms (Views: 23.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  Rendered users/show.html.erb within layouts/application (0.4ms)
+  Rendered layouts/_shim.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 38ms (Views: 36.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/statistics.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/team.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/fullcalendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/calendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/calendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/statistics.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/team.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/moment.min.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 11:15:42 -0600
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:20:06 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "1"]]
+  [1m[35mTeamMember Load (3.4ms)[0m  SELECT "team_members".* FROM "team_members" WHERE "team_members"."user_id" = ?  [["user_id", 1]]
+  [1m[36mTeam Load (0.1ms)[0m  [1mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered users/show.html.erb within layouts/application (39.8ms)
+Completed 500 Internal Server Error in 78ms
+
+ActionView::Template::Error (undefined method `positions' for nil:NilClass):
+    16:     <% @players.each do |player| %>
+    17:       <tr>
+    18:         <td><%= player.team.name %></td>
+    19:         <% @pplayer.positions.each do |position| %>
+    20:         	<td><%= position.title %></td>
+    21:          <% end %>
+    22:         <td><%= link_to 'Show', user %></td>
+  app/views/users/show.html.erb:19:in `block in _app_views_users_show_html_erb__280858489_70678920'
+  app/views/users/show.html.erb:16:in `_app_views_users_show_html_erb__280858489_70678920'
+
+
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.4ms)
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (11.0ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:20:26 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36mTeamMember Load (0.1ms)[0m  [1mSELECT "team_members".* FROM "team_members" WHERE "team_members"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mTeam Load (0.2ms)[0m  SELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mPosition Load (0.2ms)[0m  [1mSELECT "positions".* FROM "positions" INNER JOIN "player_positions" ON "positions"."id" = "player_positions"."position_id" WHERE "player_positions"."team_member_id" = ?[0m  [["team_member_id", 1]]
+  Rendered users/show.html.erb within layouts/application (41.1ms)
+Completed 500 Internal Server Error in 56ms
+
+ActionView::Template::Error (undefined local variable or method `user' for #<#<Class:0x87ff230>:0x97c7bb8>):
+    19:         <% player.positions.each do |position| %>
+    20:         	<td><%= position.title %></td>
+    21:          <% end %>
+    22:         <td><%= link_to 'Show', user %></td>
+    23:         <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    24:         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    25:       </tr>
+  app/views/users/show.html.erb:22:in `block in _app_views_users_show_html_erb__280858489_79570670'
+  app/views/users/show.html.erb:16:in `_app_views_users_show_html_erb__280858489_79570670'
+
+
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.6ms)
+  Rendered /home/steve/.rvm/gems/ruby-2.0.0-p481@railstutorial_rails_4_0/gems/actionpack-4.0.8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (11.1ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36mTeamMember Load (0.1ms)[0m  [1mSELECT "team_members".* FROM "team_members" WHERE "team_members"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mTeam Load (0.2ms)[0m  SELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mPosition Load (0.1ms)[0m  [1mSELECT "positions".* FROM "positions" INNER JOIN "player_positions" ON "positions"."id" = "player_positions"."position_id" WHERE "player_positions"."team_member_id" = ?[0m  [["team_member_id", 1]]
+  Rendered users/show.html.erb within layouts/application (23.8ms)
+  Rendered layouts/_shim.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 71ms (Views: 66.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/statistics.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/team.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/fullcalendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/calendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/calendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/statistics.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/team.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/moment.min.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:13 -0600
+  [1m[36mPosition Load (0.3ms)[0m  [1mSELECT "positions".* FROM "positions" WHERE "positions"."title" = 'Goalie' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "player_positions" ("created_at", "position_id", "team_member_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Mon, 03 Nov 2014 17:21:45 UTC +00:00], ["position_id", 1], ["team_member_id", 1], ["updated_at", Mon, 03 Nov 2014 17:21:45 UTC +00:00]]
+  [1m[35m (3.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36mTeamMember Load (0.1ms)[0m  [1mSELECT "team_members".* FROM "team_members" WHERE "team_members"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mTeam Load (0.1ms)[0m  SELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mPosition Load (0.1ms)[0m  [1mSELECT "positions".* FROM "positions" INNER JOIN "player_positions" ON "positions"."id" = "player_positions"."position_id" WHERE "player_positions"."team_member_id" = ?[0m  [["team_member_id", 1]]
+  Rendered users/show.html.erb within layouts/application (15.2ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 39ms (Views: 34.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/calendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/statistics.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/team.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/fullcalendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/calendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/statistics.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/team.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/moment.min.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 11:21:56 -0600
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36mTeamMember Load (0.1ms)[0m  [1mSELECT "team_members".* FROM "team_members" WHERE "team_members"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mTeam Load (0.1ms)[0m  SELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mPosition Load (0.2ms)[0m  [1mSELECT "positions".* FROM "positions" INNER JOIN "player_positions" ON "positions"."id" = "player_positions"."position_id" WHERE "player_positions"."team_member_id" = ?[0m  [["team_member_id", 1]]
+  Rendered users/show.html.erb within layouts/application (20.9ms)
+  Rendered layouts/_shim.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 67ms (Views: 62.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/calendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/team.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/statistics.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/fullcalendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/calendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/statistics.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/team.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/moment.min.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:37 -0600
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36mTeamMember Load (0.1ms)[0m  [1mSELECT "team_members".* FROM "team_members" WHERE "team_members"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mTeam Load (0.1ms)[0m  SELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mPosition Load (0.1ms)[0m  [1mSELECT "positions".* FROM "positions" INNER JOIN "player_positions" ON "positions"."id" = "player_positions"."position_id" WHERE "player_positions"."team_member_id" = ?[0m  [["team_member_id", 1]]
+  Rendered users/show.html.erb within layouts/application (17.3ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 38ms (Views: 33.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/calendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/statistics.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/fullcalendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/team.css?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/calendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/team.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/statistics.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/moment.min.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:22:52 -0600
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:23:14 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36mTeamMember Load (0.1ms)[0m  [1mSELECT "team_members".* FROM "team_members" WHERE "team_members"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mTeam Load (0.1ms)[0m  SELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mPosition Load (0.1ms)[0m  [1mSELECT "positions".* FROM "positions" INNER JOIN "player_positions" ON "positions"."id" = "player_positions"."position_id" WHERE "player_positions"."team_member_id" = ?[0m  [["team_member_id", 1]]
+  Rendered users/show.html.erb within layouts/application (12.6ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 24ms (Views: 22.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:14 -0600
+
+
+Started GET "/assets/calendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:14 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:14 -0600
+
+
+Started GET "/assets/team.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:14 -0600
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:14 -0600
+
+
+Started GET "/assets/statistics.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:14 -0600
+
+
+Started GET "/assets/fullcalendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:14 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:14 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:14 -0600
+
+
+Started GET "/assets/statistics.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:14 -0600
+
+
+Started GET "/assets/team.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:14 -0600
+
+
+Started GET "/assets/calendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:15 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:15 -0600
+
+
+Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:15 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:15 -0600
+
+
+Started GET "/assets/moment.min.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:15 -0600
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:15 -0600
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36mTeamMember Load (0.1ms)[0m  [1mSELECT "team_members".* FROM "team_members" WHERE "team_members"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mTeam Load (0.1ms)[0m  SELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mPosition Load (0.1ms)[0m  [1mSELECT "positions".* FROM "positions" INNER JOIN "player_positions" ON "positions"."id" = "player_positions"."position_id" WHERE "player_positions"."team_member_id" = ?[0m  [["team_member_id", 1]]
+  Rendered users/show.html.erb within layouts/application (14.7ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 41ms (Views: 36.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/calendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/statistics.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/team.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/fullcalendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/team.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/calendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/statistics.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/moment.min.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:29 -0600
+
+
+Started GET "/users" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (1.9ms)
+  Rendered layouts/_shim.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 20ms (Views: 19.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 11ms (Views: 10.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/statistics.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/team.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/fullcalendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/calendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/statistics.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/calendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/team.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/moment.min.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:39 -0600
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:23:41 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36mTeamMember Load (0.1ms)[0m  [1mSELECT "team_members".* FROM "team_members" WHERE "team_members"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mTeam Load (0.1ms)[0m  SELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mPosition Load (0.1ms)[0m  [1mSELECT "positions".* FROM "positions" INNER JOIN "player_positions" ON "positions"."id" = "player_positions"."position_id" WHERE "player_positions"."team_member_id" = ?[0m  [["team_member_id", 1]]
+  Rendered users/show.html.erb within layouts/application (10.6ms)
+  Rendered layouts/_shim.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 30ms (Views: 26.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-03 11:23:41 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36mTeamMember Load (0.2ms)[0m  [1mSELECT "team_members".* FROM "team_members" WHERE "team_members"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mTeam Load (0.1ms)[0m  SELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mPosition Load (0.1ms)[0m  [1mSELECT "positions".* FROM "positions" INNER JOIN "player_positions" ON "positions"."id" = "player_positions"."position_id" WHERE "player_positions"."team_member_id" = ?[0m  [["team_member_id", 1]]
+  Rendered users/show.html.erb within layouts/application (3.9ms)
+  Rendered layouts/_shim.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 39ms (Views: 37.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:41 -0600
+
+
+Started GET "/assets/calendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:41 -0600
+
+
+Started GET "/assets/statistics.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:41 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:41 -0600
+
+
+Started GET "/assets/team.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:41 -0600
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:41 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:41 -0600
+
+
+Started GET "/assets/fullcalendar.css?body=1" for 127.0.0.1 at 2014-11-03 11:23:41 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:41 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:41 -0600
+
+
+Started GET "/assets/calendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:42 -0600
+
+
+Started GET "/assets/statistics.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:42 -0600
+
+
+Started GET "/assets/moment.min.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:42 -0600
+
+
+Started GET "/assets/team.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:42 -0600
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:42 -0600
+
+
+Started GET "/assets/fullcalendar.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:42 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 11:23:42 -0600
