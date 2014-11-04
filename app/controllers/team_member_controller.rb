@@ -3,6 +3,7 @@ class TeamMemberController < ApplicationController
   end
 
   def profile
+      @teamMember = TeamMember.find(params[:id])
   end
 
   def edit
