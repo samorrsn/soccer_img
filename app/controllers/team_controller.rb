@@ -1,6 +1,8 @@
 class TeamController < ApplicationController
 
     def profile
+        @team = Team.find(params[:id])
+        # @team_members = TeamMember.all
     end
 
     def schedule
