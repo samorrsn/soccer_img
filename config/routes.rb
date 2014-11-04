@@ -1,5 +1,11 @@
 STM::Application.routes.draw do
 
+  get "team_member/new"
+  get "team_member/profile"
+  get "team_member/edit"
+  get "team_player/new"
+  get "team_player/profile"
+  get "team_player/edit"
   get "calendar/index"
   get "statistics/index"
   get "team/profile"
