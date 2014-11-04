@@ -1,0 +1,14 @@
+<h1>Editing team_member</h1>
+
+<h2>Player Positions</h2>
+<%= form_for @team_member do -%>
+  <% Position.all.each do |position| -%>
+    <div>
+      <%= check_box_tag :position_ids, position.id, @team_member.positions.include?(position), :name => 'team_member[position_ids][]' -%>
+      <%= label_tag :position_ids, position.title -%>
+    </div>
+  <% end -%>
+  <%= submit_tag -%>
+<% end -%>
+<%= link_to 'Show', @team_member %> |
+<%= link_to 'Back', team_members_path %>

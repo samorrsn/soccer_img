@@ -10,4 +10,14 @@ class TeamController < ApplicationController
 
   def positions
   end
+
+  def create
+    @user = User.new(user_params)
+
+    respond_to do |format|
+      if @team.save
+        @position = Position.new(title:'Goalie')
+      end
+    end
+  end
 end

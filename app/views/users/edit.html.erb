@@ -4,13 +4,7 @@
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-
-      <!-- <%= f.Firstname :firstName %>
-      <%= f.text_field :firstName %>
-
-      <%= f.Lastname :lastName %>
-      <%= f.text_field :lastName %> -->
+     <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.label :first_name %>
       <%= f.text_field :first_name %>
@@ -39,19 +33,11 @@
       <%= f.label :zipcode %>
       <%= f.text_field :zipcode %>
 
-      <!-- <%= f.label :primaryPosition %>
-      <%= f.text_field :primaryPosition %>
-
-      <%= f.label :secondaryPosition %>
-      <%= f.text_field :secondaryPosition %> -->
 
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
 
-    <div class="gravatar_edit">
-      <%= gravatar_for @user %>
-      <a href="http://gravatar.com/emails">change</a>
-    </div>
+    
   </div>
 </div>
 

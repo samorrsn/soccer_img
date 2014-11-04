@@ -7,7 +7,7 @@ STM::Application.routes.draw do
   get "team/players"
   get "team/positions"
   resources :users
-
+  resources :team_members
   root "static_pages#home"
 
   # The priority is based upon order of creation: first created -> highest priority.

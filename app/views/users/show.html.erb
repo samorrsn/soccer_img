@@ -17,12 +17,13 @@
       <tr>
         <td><%= player.team.name %></td>
         <td><% player.positions.each do |position| %>
-        	<%= position.title %><br>
+        	<%= position.title %>
          <% end %></td>
-        <td><%= link_to 'Edit', edit_user_path(@user) %></td>
-        <td><%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit Positions', [:edit, player] %></td>
       </tr>
     <% end %>
+    <td><%= link_to 'Edit', edit_user_path(@user) %></td>
+    <td><%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tbody>
 </table>
 </p>
