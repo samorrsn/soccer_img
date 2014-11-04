@@ -2,7 +2,8 @@ class TeamController < ApplicationController
 
     def profile
         @team = Team.find(params[:id])
-        # @team_members = TeamMember.all
+        @team_members = TeamMember.where(team_id: params[:id]).order('created_at DESC')
+        # @team_members.each do 
     end
 
     def schedule

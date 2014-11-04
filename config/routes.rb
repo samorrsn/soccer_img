@@ -6,7 +6,7 @@ STM::Application.routes.draw do
   get "team_player/new"
   get "team_player/profile"
   get "team_player/edit"
-  get "calendar/index"
+  # get "calendar/index"
   get "statistics/index"
   get '/team/:id/profile', to: 'team#profile'
   get '/team/:id/schedule', to: 'team#profile'
@@ -15,6 +15,8 @@ STM::Application.routes.draw do
   resources :users
   resources :team_members
   root "static_pages#home"
+
+  match '/calendar', to: 'calendar#index',  via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
