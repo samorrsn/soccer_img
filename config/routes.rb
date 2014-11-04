@@ -8,10 +8,10 @@ STM::Application.routes.draw do
   get "team_player/edit"
   get "calendar/index"
   get "statistics/index"
-  get "team/profile"
-  get "team/schedule"
-  get "team/players"
-  get "team/positions"
+  get '/team/:id/profile', to: 'team#profile'
+  get '/team/:id/schedule', to: 'team#profile'
+  get '/team/:id/players', to: 'team#profile'
+  get '/team/:id/positions', to: 'team#profile'
   resources :users
   resources :team_members
   root "static_pages#home"
