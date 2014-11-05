@@ -1,0 +1,34 @@
+<div id="calendar-body">
+    <!--
+        Require that the page rendering this calendar contains a div of class populEvent
+    -->
+    
+    <div id='calendar'></div>
+    <script>
+        //hide the popup initially
+        $(".popupEvent").hide();
+        $(document).ready(function() {
+            //hide the popup when the button is clicked
+            $("button").click(function() {
+                $(".popupEvent").hide();
+            });
+            // page is now ready, initialize the calendar...
+            $('#calendar').fullCalendar({
+                // put your options and callbacks here
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                //theme: true,
+                editable: true,
+
+                dayClick: function(date, jsEvent, view) {
+                    $(".popupEvent").show();
+
+                }
+            });
+
+        });
+    </script>
+</div>

@@ -9,8 +9,8 @@ STM::Application.routes.draw do
   # get "calendar/index"
   get "statistics/index"
   get '/team/:id/profile', to: 'team#profile'
-  get '/team/:id/schedule', to: 'team#profile'
-  get '/team/:id/players', to: 'team#profile'
+  get '/team/:id/schedule', to: 'team#schedule'
+  get '/team/:id/players', to: 'team#players'
   get '/team/:id/positions', to: 'team#profile'
   get '/team/:id/player_availabilites', to: 'team#player_availabilities'
   resources :users

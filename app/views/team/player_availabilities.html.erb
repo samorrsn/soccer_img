@@ -22,12 +22,16 @@
                     <td><p><%= team_member.member_last_name %></p></td>
                     <td>
                         <% team_member.team_member_availabilities.each do |availability| %>
-                            <%= availability.date %><br>
+                            <% if availability.isAvailable %>
+                                <%= availability.date %><br>
+                            <% end %>
                         <% end %>
                     </td>
                     <td>
                         <% team_member.team_member_availabilities.each do |availability| %>
-                            <%= availability.date %><br>
+                            <% if !availability.isAvailable %>
+                                <%= availability.date %><br>
+                            <% end %>
                         <% end %>
                     </td>
                     <td>
