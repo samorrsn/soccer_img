@@ -12,6 +12,7 @@ STM::Application.routes.draw do
   get '/team/:id/schedule', to: 'team#profile'
   get '/team/:id/players', to: 'team#profile'
   get '/team/:id/positions', to: 'team#profile'
+  get '/team/:id/player_availabilites', to: 'team#player_availabilities'
   resources :users
   resources :team_members
   root "static_pages#home"
