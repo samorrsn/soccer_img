@@ -1,0 +1,8 @@
+<a href="/teams/<%= "#{@team.id}".html_safe %>/profile">
+    <div class="page-header">
+        <h1 id="team-page-header" ><%= @team.name %> <small><%= @team.mascot %></small></h1>
+    </div>
+</a>
+
+<%= link_to "Schedule", "schedule", class: "btn btn-large btn-primary", id: "team-profile-top-btn" %>
+<%= link_to "View Availabilities", "player_availabilites", class: "btn btn-large btn-primary",id: "team-profile-top-btn" %>

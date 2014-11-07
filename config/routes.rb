@@ -1,20 +1,21 @@
 STM::Application.routes.draw do
 
-  get "team_member/new"
-  get "team_member/profile"
-  get "team_member/edit"
-  get "team_player/new"
-  get "team_player/profile"
-  get "team_player/edit"
+  get "team_members/new"
+  get "team_members/profile"
+  get "team_members/edit"
+  get "team_players/new"
+  get "team_players/profile"
+  get "team_players/edit"
   # get "calendar/index"
   get "statistics/index"
-  get '/team/:id/profile', to: 'team#profile'
-  get '/team/:id/schedule', to: 'team#schedule'
-  get '/team/:id/players', to: 'team#players'
-  get '/team/:id/positions', to: 'team#profile'
-  get '/team/:id/player_availabilites', to: 'team#player_availabilities'
+  get '/teams/:id/profile', to: 'teams#profile'
+  get '/teams/:id/schedule', to: 'teams#schedule'
+  get '/teams/:id/players', to: 'teams#players'
+  get '/teams/:id/positions', to: 'teams#profile'
+  get '/teams/:id/player_availabilites', to: 'teams#player_availabilities'
   resources :users
   resources :team_members
+  resources :teams
   root "static_pages#home"
 
   match '/calendar', to: 'calendar#index',  via: 'get'
