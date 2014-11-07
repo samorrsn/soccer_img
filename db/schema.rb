@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141105203329) do
+ActiveRecord::Schema.define(version: 20141106231128) do
 
   create_table "events", force: true do |t|
     t.string   "type"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20141105203329) do
     t.boolean  "is_coach"
     t.string   "member_first_name"
     t.string   "member_last_name"
+    t.text     "notes"
   end
 
   add_index "team_members", ["team_id", "user_id"], name: "index_team_members_on_team_id_and_user_id", unique: true
@@ -82,12 +83,15 @@ ActiveRecord::Schema.define(version: 20141105203329) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "user_type"
-    t.string   "password"
+    t.string   "password_digest"
     t.string   "phone_number"
     t.string   "street_address"
     t.string   "city"
     t.string   "state"
     t.integer  "zipcode"
+    t.string   "remember_token"
   end
+
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end

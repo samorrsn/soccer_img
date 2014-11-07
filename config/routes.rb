@@ -1,5 +1,10 @@
 STM::Application.routes.draw do
-
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+  root  'static_pages#home'
+  match '/signup',  to: 'users#new',            via: 'get'
+  match '/login',  to: 'sessions#new',         via: 'get'
+  match '/logout', to: 'sessions#destroy',     via: 'delete'
   get "team_members/new"
   get "team_members/profile"
   get "team_members/edit"
@@ -13,13 +18,15 @@ STM::Application.routes.draw do
   get '/teams/:id/players', to: 'teams#players'
   get '/teams/:id/positions', to: 'teams#profile'
   get '/teams/:id/player_availabilites', to: 'teams#player_availabilities'
-  resources :users
+  
   resources :team_members
   resources :teams
-  root "static_pages#home"
 
+  get "static_pages/home"
   match '/calendar', to: 'calendar#index',  via: 'get'
-  match '/login', to: 'login#index',  via: 'get'
+  #match '/login', to: 'login#index',  via: 'get'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

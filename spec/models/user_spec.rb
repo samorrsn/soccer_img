@@ -6,12 +6,7 @@ describe User do
                               last_name: "Bobston",
                               email: "user@example.com",
                               password: "temp1234",
-                              phone_number: "555-555-5555",
-                              street_address: "1234 Cool Lane",
-                              city: "Stringland",
-                              state: "TN",
-                              zipcode: 38002,
-                              user_type: "admin"
+                              password_confirmation: "temp1234"
                               ) }
   subject { @user }
 
@@ -25,5 +20,8 @@ describe User do
   it { should respond_to(:state) }
   it { should respond_to(:zipcode) }
   it { should respond_to(:user_type) }
+  it { should respond_to(:password) }
+  it { should respond_to(:password_confirmation) }
+  it { should respond_to(:password_digest) }
 
 end

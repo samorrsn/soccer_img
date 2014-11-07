@@ -8,6 +8,7 @@ class TeamsController < ApplicationController
 
   # GET /teams/1
   def show
+    @team = Team.find(params[:id])
   end
 
   # GET /teams/new
@@ -17,6 +18,7 @@ class TeamsController < ApplicationController
 
   # GET /teams/1/edit
   def edit
+    @team = Team.find(params[:id])
   end
 
   def profile
@@ -45,11 +47,15 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @team = Team.new(team_params)
 
     respond_to do |format|
       if @team.save
-        @position = Position.new(title:'Goalie')
+        format.html { redirect_to @team, notice: 'Team was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @team }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -77,6 +83,6 @@ class TeamsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def team_params
-    params[:team]
+    params.require(:team).permit(:name, :mascot)
   end
 end
