@@ -1,8 +1,9 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container-fluid">
-      <%= link_to "sample app", root_path, id: "logo" %>
+
       <nav>
+        <%= link_to "Soccer Team Manager", root_path, id: "logo" %>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
           <% if signed_in? %>

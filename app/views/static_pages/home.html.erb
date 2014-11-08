@@ -1,10 +1,16 @@
 <% provide(:title, 'Home') %>
 
 <% if signed_in? %>
-
+  <h1>Hi, <%= current_user.first_name %></h1>
+  <ul class="nav nav-pills nav-stacked" role="tablist">
+    <li role="presentation" class="active"><a href="#">Teams</a></li>
+    <li role="presentation"><a href="#">Calendar</a></li>
+    <li role="presentation"><a href="#">Messages</a></li>
+  </ul>
 <% else %>
-  <div class="row">
-    <div class="col-md-9 col-md-push-3">.col-md-9 .col-md-push-3</div>
-    <div class="col-md-3 col-md-pull-9">.col-md-3 .col-md-pull-9</div>
+  <div class="jumbotron">
+    <h1>Welcome, Soccer Person!</h1>
+    <p>If you do not have an account hit the register button, and if you do have an account, why are you looking at this instead of being logged in?</p>
+    <%= link_to "Register", signup_path, class: "btn btn-large btn-primary", id: "team-profile-top-btn" %>
   </div>
 <% end %>
