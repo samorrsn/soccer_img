@@ -1,0 +1,13 @@
+<tr>
+  <td><p><%= team_member.member_first_name %></p></td>
+  <td><p><%= team_member.member_last_name %></p></td>
+  <td>
+    <% team_member.positions.each do |position| %>
+      <%= position.title %><br>
+    <% end %>
+  </td>
+  <td>
+    <div class="btn btn-xs">Profile</div>
+    <div class="btn btn-xs">Edit</div>
+  </td>
+</tr>

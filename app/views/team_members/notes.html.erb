@@ -1,0 +1,36 @@
+<style>
+    body .modal {
+        /* new custom width */
+        width: 500px;
+        /* must be half of the width, minus scrollbar on the left (30px) */
+        margin-left: -250px;
+    }
+    input {
+        width: 457px;
+    }
+</style>
+<%= form_for @team_member do |f| %>
+<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="text-center">Login</h1>
+            </div>
+            <div class="modal-body">
+                <form class="form col-md-12">
+                    <div class="form-group">
+                        <%= f.text_area :notes %>  
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control input-lg" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-primary" href="#">Sign In</a>
+                        <a class="btn pull-right" href="#">Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>

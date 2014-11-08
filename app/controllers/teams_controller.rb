@@ -3,7 +3,11 @@ class TeamsController < ApplicationController
 
   # GET /teams
   def index
-    @teams = Team.all
+    if signed_in?
+      @teams = current_user.teams
+    else
+      @teams = Team.all
+    end
   end
 
   # GET /teams/1

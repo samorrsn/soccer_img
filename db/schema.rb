@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20141108110504) do
     t.datetime "updated_at"
   end
 
+  create_table "notes", force: true do |t|
+    t.integer  "player_id"
+    t.integer  "coach_id"
+    t.text     "note_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notes", ["player_id", "coach_id"], name: "index_notes_on_player_id_and_coach_id"
+
   create_table "player_positions", force: true do |t|
     t.integer  "team_member_id"
     t.datetime "created_at"
@@ -63,7 +73,6 @@ ActiveRecord::Schema.define(version: 20141108110504) do
     t.boolean  "is_coach"
     t.string   "member_first_name"
     t.string   "member_last_name"
-    t.text     "notes"
   end
 
   add_index "team_members", ["team_id", "user_id"], name: "index_team_members_on_team_id_and_user_id", unique: true

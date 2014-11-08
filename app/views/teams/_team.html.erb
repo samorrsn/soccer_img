@@ -1,0 +1,10 @@
+<tr>
+  <td><p><%= team.name %></p></td>
+  <td><p><%= team.mascot %></p></td>
+  <td>
+    <%= link_to "Profile", profile_path(team), class: "btn btn-xs" %>
+    <% if is_coach?(team) %>
+     <%= link_to "Edit", edit_team_path(team), class: "btn btn-xs" %>
+    <% end %>
+  </td>
+</tr>

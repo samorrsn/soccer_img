@@ -18,7 +18,7 @@ class TeamMembersController < ApplicationController
   # GET /team_members/1/edit
   def edit
     @team_member = TeamMember.find(params[:id])
-   
+    @notes = Note.find_by_player_id(team_member)
     @user_id = @team_member.user_id
     @team_id = @team_member.team_id
   end
@@ -36,7 +36,7 @@ class TeamMembersController < ApplicationController
 
   # PATCH/PUT /team_members/1
   def update
-     @team_member.attributes = {'position_ids' => []}.merge(params[:team_member] || {})
+    @team_member.attributes = {'position_ids' => []}.merge(params[:team_member] || {})
     if @team_member.update(team_member_params)
       redirect_to @team_member, notice: 'Team member was successfully updated.'
     else
@@ -50,14 +50,18 @@ class TeamMembersController < ApplicationController
     redirect_to team_members_url, notice: 'Team member was successfully destroyed.'
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_team_member
-      @team_member = TeamMember.find(params[:id])
-    end
+  def notes
+    @team_member = TeamMember.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def team_member_params
-     params.require(:team_member).permit(:user_id, :team_id, :is_coach, :user_first_name, :user_last_name, :notes)
-    end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_team_member
+    @team_member = TeamMember.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def team_member_params
+    params.require(:team_member).permit(:user_id, :team_id, :is_coach, :user_first_name, :user_last_name, :notes)
+  end
 end

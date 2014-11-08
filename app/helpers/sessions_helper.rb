@@ -20,6 +20,11 @@ module SessionsHelper
 		@current_user ||= User.find_by(remember_token: remember_token)
 	end
 
+	def my_teams
+		remember_token = User.digest(cookies[:remember_token])
+		@my_teams ||= User.find_by(remember_token: remember_token).teams
+	end
+
 	def sign_out
 		current_user.update_attribute(:remember_token,
 									User.digest(User.new_remember_token))
