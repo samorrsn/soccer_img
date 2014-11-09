@@ -27,7 +27,9 @@ class TeamsController < ApplicationController
 
   def profile
     @team = Team.find(params[:id])
-    @team_members = @team.team_members
+    @team_players = @team.team_players
+    @notes = @team.notes
+
   end
 
   def player_availabilities

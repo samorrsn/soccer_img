@@ -23,6 +23,7 @@ class TeamMembersController < ApplicationController
     @team_id = @team_member.team_id
   end
 
+
   # POST /team_members
   def create
     @team_member = TeamMember.new(team_member_params)
@@ -50,8 +51,9 @@ class TeamMembersController < ApplicationController
     redirect_to team_members_url, notice: 'Team member was successfully destroyed.'
   end
 
-  def notes
+  def note
     @team_member = TeamMember.find(params[:id])
+    @notes = @team_member.notes
   end
 
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108110504) do
+ActiveRecord::Schema.define(version: 20141108192404) do
 
   create_table "events", force: true do |t|
     t.string   "type"
@@ -24,14 +24,14 @@ ActiveRecord::Schema.define(version: 20141108110504) do
   end
 
   create_table "notes", force: true do |t|
-    t.integer  "player_id"
-    t.integer  "coach_id"
+    t.integer  "team_player_id"
+    t.integer  "team_coach_id"
     t.text     "note_text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "notes", ["player_id", "coach_id"], name: "index_notes_on_player_id_and_coach_id"
+  add_index "notes", ["team_player_id", "team_coach_id"], name: "index_notes_on_team_player_id_and_team_coach_id"
 
   create_table "player_positions", force: true do |t|
     t.integer  "team_member_id"
@@ -70,9 +70,9 @@ ActiveRecord::Schema.define(version: 20141108110504) do
     t.datetime "updated_at"
     t.integer  "team_id"
     t.integer  "user_id"
-    t.boolean  "is_coach"
     t.string   "member_first_name"
     t.string   "member_last_name"
+    t.string   "type"
   end
 
   add_index "team_members", ["team_id", "user_id"], name: "index_team_members_on_team_id_and_user_id", unique: true

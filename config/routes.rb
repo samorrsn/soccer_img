@@ -31,13 +31,15 @@ STM::Application.routes.draw do
   resources :team_members
   resources :teams
   resources :team_member_availabilities
-
+  resources :team_players
+  
   get "static_pages/home"
   match '/calendar', to: 'calendar#index',  via: 'get'
   #match '/login', to: 'login#index',  via: 'get'
 resources :notes
 get 'notes/index'
 
+get 'team_members/:id/note', to: 'team_members#note'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

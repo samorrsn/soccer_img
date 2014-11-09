@@ -1,0 +1,46 @@
+<style>
+  body .modal {
+    /* new custom width */
+    width: 500px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    margin-left: -250px;
+  }
+  input {
+    width: 457px;
+  }
+</style>
+<div id="notes-modal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="text-center">Player Notes</h1>
+      </div>
+      <div class="modal-body">
+        <%= form_for @team_member do |f| %>
+          <form class="form col-md-12">
+            <table id="notes_table" class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @team_member.notes.each do |note| %>
+                  <tr>
+                    <td><%= note.note_text %></td>
+                    <td><div class="btn btn-xs">Edit</div>
+                      <div class="btn btn-xs">Delete</div></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </form>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <a class="btn pull-left" href="#">Add New Note</a>
+        <%= submit_tag 'Close', :type => :reset, :class => "btn btn-danger", "data-dismiss" => "modal", "aria-hidden" => "true" %>
+      </div>
+    </div>
+  </div>
+</div>
