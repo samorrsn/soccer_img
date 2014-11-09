@@ -21,12 +21,21 @@
     </table>
 
 <h2>Add a player position</h2>
-<%= form_for @team_member do -%>
-<% Position.all.each do |position| -%>
-<div>
-    grouped_collection_select(:position, :position_id, @team_members, :positions, :name, :id, :title)
+
+<script> var count= <%=%> </script>
+<div id="edit-positions-form-1" class="edit-positions-form" style="width: 400px height: 200px" onload="makeHidden (<%= : %>);">
 </div>
-<% end -%>
-<%= submit_tag -%>
-<% end -%>
-</div>
+
+<script>
+
+for (var i=0; i<forms; i++){
+    console.log("Test" + i);
+}
+function makeHidden(id) (
+    console.log(id);
+    $("#edit-positions-form-"+id).hide();
+    )
+function makeVisible(id)(
+    $("edit-positions-form-"+id).show();
+    )
+</script>
