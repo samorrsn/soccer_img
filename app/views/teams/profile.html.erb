@@ -1,32 +1,6 @@
 <%= provide(:title, @team.name) %>
 <%= render 'header' %>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Team Players</div>
-    </div>
-    <!-- Leaving the body panel of this table empty for now -->
-    <div class="panel-body"></div>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Positions</th>
-            </tr>
-        </thead>
-        <tbody>
-           <% #render @team_members, :team %>
-           <%= render partial: 'team_player', collection: @team_players %>
-        </tbody>
-    </table>
+<%= render 'teams/team_member' %>
 
 <h2>Add a player position</h2>
-<%= form_for @team_member do -%>
-<% Position.all.each do |position| -%>
-<div>
-    grouped_collection_select(:position, :position_id, @team_members, :positions, :name, :id, :title)
-</div>
-<% end -%>
-<%= submit_tag -%>
-<% end -%>
-</div>

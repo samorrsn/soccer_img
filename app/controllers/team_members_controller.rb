@@ -18,7 +18,7 @@ class TeamMembersController < ApplicationController
   # GET /team_members/1/edit
   def edit
     @team_member = TeamMember.find(params[:id])
-    @notes = Note.find_by_player_id(team_member)
+    # @notes = Note.find_by_player_id(@team_member)
     @user_id = @team_member.user_id
     @team_id = @team_member.team_id
   end
@@ -66,4 +66,5 @@ class TeamMembersController < ApplicationController
   def team_member_params
     params.require(:team_member).permit(:user_id, :team_id, :is_coach, :user_first_name, :user_last_name, :notes)
   end
+
 end
