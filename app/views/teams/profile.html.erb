@@ -19,4 +19,14 @@
            <%= render partial: 'team_player', collection: @team_players %>
         </tbody>
     </table>
+
+<h2>Add a player position</h2>
+<%= form_for @team_member do -%>
+<% Position.all.each do |position| -%>
+<div>
+    grouped_collection_select(:position, :position_id, @team_members, :positions, :name, :id, :title)
+</div>
+<% end -%>
+<%= submit_tag -%>
+<% end -%>
 </div>
