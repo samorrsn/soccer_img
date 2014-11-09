@@ -1,41 +1,5 @@
 <%= provide(:title, @team.name) %>
 <%= render 'header' %>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Team Players</div>
-    </div>
-    <!-- Leaving the body panel of this table empty for now -->
-    <div class="panel-body"></div>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Positions</th>
-            </tr>
-        </thead>
-        <tbody>
-           <% #render @team_members, :team %>
-           <%= render partial: 'team_player', collection: @team_players %>
-        </tbody>
-    </table>
+<%= render 'teams/team_member' %>
 
-<h2>Add a player position</h2>
-
-<script> var count= <%=%> </script>
-<div id="edit-positions-form-1" class="edit-positions-form" style="width: 400px height: 200px" onload="makeHidden (<%= : %>);">
-</div>
-
-<script>
-
-for (var i=0; i<forms; i++){
-    console.log("Test" + i);
-}
-function makeHidden(id) (
-    console.log(id);
-    $("#edit-positions-form-"+id).hide();
-    )
-function makeVisible(id)(
-    $("edit-positions-form-"+id).show();
-    )
-</script>
