@@ -38,6 +38,7 @@ class TeamsController < ApplicationController
   def schedule
     @team = Team.find(params[:id])
     @team_members = @team.team_members
+    @team_member_availability = TeamMemberAvailability.new
   end
 
   def players

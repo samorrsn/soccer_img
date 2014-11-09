@@ -8,4 +8,8 @@ class TeamMember < ActiveRecord::Base
 	def self.is_coach
 		where(is_coach: 't')
 	end
+
+	def full_name
+		"#{member_first_name} #{member_last_name}"
+	end
 end

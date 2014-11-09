@@ -1,7 +1,12 @@
 STM::Application.routes.draw do
+  # get "team_member_availability/new"
+  # get "team_member_availability/create"
+  # get "team_member_availability/update"
+  # get "team_member_availability/edit"
+  # get "team_member_availability/destroy"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  
+
   root  'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/login',  to: 'sessions#new',         via: 'get'
@@ -25,6 +30,7 @@ STM::Application.routes.draw do
 
   resources :team_members
   resources :teams
+  resources :team_member_availabilities
 
   get "static_pages/home"
   match '/calendar', to: 'calendar#index',  via: 'get'
