@@ -17,10 +17,10 @@ var forms=[];
 
 			<%= team_player.member_first_name %>
 			<%= team_player.member_last_name %>
-		
+
 			<%= form_for(@test) do |f| %>
 				<%= f.collection_select(:position_id, Position.all, :id, :title) %>
-				<%= f.hidden_field :team_member_id, :value => team_player.id %>			
+				<%= f.hidden_field :team_member_id, :value => team_player.id %>
 				<%= f.submit %>
 			<% end %>
 		</div>

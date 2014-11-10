@@ -1,0 +1,44 @@
+<style>
+body .modal {
+  /* new custom width */
+  width: 500px;
+  /* must be half of the width, minus scrollbar on the left (30px) */
+  margin-left: -250px;
+}
+input {
+  width: 457px;
+}
+</style>
+
+<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="text-center">Set New Availability</h1>
+      </div>
+      <div class="modal-body">
+        <%= form_for(:team_member_availability,  html: { class: "form col-md-12" }, url: team_member_availabilities_path) do |f| %>
+          <div class="form-group">
+            <%= f.hidden_field :team_member_id, :value => @team_member.id %>
+          </div>
+          <div class="form-group">
+            <p>Check if you are available: <%= f.check_box :is_available, class: "form-control input-lg" %></p>
+          </div>
+          <div class="form-group">
+            <%= f.date_field :date , class: "form-control input-lg" %>
+          </div>
+          <div class="form-group">
+            <%= f.datetime_field :from_time , class: "form-control input-lg", placeholder:"hh:mm"%>
+          </div>
+          <div class="form-group">
+            <%= f.datetime_field :till_time , class: "form-control input-lg", placeholder:"hh:mm"%>
+          </div>
+          <div class="form-group" >
+            <%= f.submit "Set Availability", class: "btn btn-primary" %>
+            <%= link_to 'Back', player_availabilities_path(id: @team.id), class: "btn pull-right" %>
+          </div>
+       <% end %>
+     </div>
+   </div>
+ </div>
+</div>

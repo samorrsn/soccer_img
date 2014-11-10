@@ -27,7 +27,7 @@ class TeamsController < ApplicationController
 
   def profile
     @team = Team.find(params[:id])
-    @team_players = @team.team_players
+    @team_players = @team.team_members
     @notes = @team.notes
     @player_positions_arr = Array.new()
     @test = PlayerPosition.new
@@ -36,6 +36,7 @@ class TeamsController < ApplicationController
   def player_availabilities
     @team = Team.find(params[:id])
     @team_members = @team.team_members
+    @team_member_availability = TeamMemberAvailability.new
   end
 
   def schedule
@@ -59,7 +60,7 @@ class TeamsController < ApplicationController
     respond_to do |format|
       if @team.save
         @coach = TeamMember.create("team_id"=> @team.id, "user_id"=> current_user.id, "member_first_name"=> current_user.first_name, "member_last_name"=>current_user.last_name, "type" => "TeamCoach")
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
+        format.html { redirect_to teams_path, notice: 'Team was successfully created.' }
         format.json { render action: 'show', status: :created, location: @team }
       else
         format.html { render action: 'new' }

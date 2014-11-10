@@ -8,9 +8,9 @@
     <li role="presentation"><a href="#">Messages</a></li>
   </ul>
 <% else %>
-  <div class="jumbotron">
+  <div class="jumbotron home-jumbotron">
     <h1>Welcome, Soccer Person!</h1>
     <p>If you do not have an account hit the register button, and if you do have an account, why are you looking at this instead of being logged in?</p>
-    <%= link_to "Register", signup_path, class: "btn btn-large btn-primary", id: "team-profile-top-btn" %>
+    <%= link_to "Register", signup_path, class: "btn btn-large btn-primary home-register-btn", id: "team-profile-top-btn" %>
   </div>
 <% end %>
