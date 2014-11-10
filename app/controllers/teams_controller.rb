@@ -57,7 +57,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     respond_to do |format|
       if @team.save
-        @coach = TeamMember.create("team_id"=> @team.id, "user_id"=> current_user.id, "is_coach"=> true, "member_first_name"=> current_user.first_name, "member_last_name"=>current_user.last_name)
+        @coach = TeamMember.create("team_id"=> @team.id, "user_id"=> current_user.id, "member_first_name"=> current_user.first_name, "member_last_name"=>current_user.last_name, "type" => "TeamCoach")
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
         format.json { render action: 'show', status: :created, location: @team }
       else

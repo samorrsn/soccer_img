@@ -3,8 +3,8 @@
 <% if signed_in? %>
   <h1>Hi, <%= current_user.first_name %></h1>
   <ul class="nav nav-pills nav-stacked" role="tablist">
-    <li role="presentation" class="active"><a href="#">Teams</a></li>
-    <li role="presentation"><a href="#">Calendar</a></li>
+    <li role="presentation" class="active"><a href="teams">Teams</a></li>
+    <li role="presentation"><a href="calendar">Calendar</a></li>
     <li role="presentation"><a href="#">Messages</a></li>
   </ul>
 <% else %>
