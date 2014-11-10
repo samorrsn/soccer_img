@@ -30,6 +30,7 @@ STM::Application.routes.draw do
   resources :teams
   resources :team_member_availabilities
   resources :team_players
+  resources :statistics
 
   get "static_pages/home"
   match '/calendar', to: 'calendar#index',  via: 'get'
