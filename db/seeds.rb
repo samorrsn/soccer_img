@@ -1,6 +1,6 @@
 # Create Users
 #   Users can be thought of as an account, which is independant of any Coach or Player
-User.create("first_name"=>"John", "last_name"=>"Doe", "user_type"=>"member", "email"=>"john@doe.com", "password"=>"111111", "password_confirmation"=>"111111")
+User.create("first_name"=>"John", "last_name"=>"Doe", "email"=>"john@doe.com", "password"=>"111111", "password_confirmation"=>"111111")
 # Create Teams
 Team.create("name"=>"Tigers", "mascot"=>"Tiger")
 Team.create("name"=>"Sharks", "mascot"=>"Goldfish")
