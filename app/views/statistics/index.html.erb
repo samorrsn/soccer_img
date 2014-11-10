@@ -1,2 +1,19 @@
 <h1>Statistics#index</h1>
-<p>Find me in app/views/statistics/index.html.erb</p>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Position</th>
+    <th>Goals</th>
+    <th>Assists</th>
+  </tr>
+ 
+<% @team_members.each do |user| %>
+  <tr>
+    <td><%= user.member_first_name %>  <%= user.member_last_name %></td>
+    <td><%= user.Position %></td>
+    <td><%= user.Goals %></td>
+    <td><%= user.Assists %></td>
+  </tr>
+<% end %>
+</table>
