@@ -8,8 +8,8 @@
         <%= f.label :team_member %>
         <%= f.collection_select(:team_member_id, TeamMember.all, :id, :full_name) %>
 
-        <%= f.label :isAvailable %>
-        <%= f.check_box :isAvailable %>
+        <%= f.label :is_available %>
+        <%= f.check_box :is_available %>
 
         <%= f.label :date %>
         <%= f.date_field :date %>

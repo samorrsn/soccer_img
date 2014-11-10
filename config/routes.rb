@@ -1,11 +1,6 @@
 STM::Application.routes.draw do
-  
+
   resources :player_positions
-  # get "team_member_availability/new"
-  # get "team_member_availability/create"
-  # get "team_member_availability/update"
-  # get "team_member_availability/edit"
-  # get "team_member_availability/destroy"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
@@ -28,20 +23,32 @@ STM::Application.routes.draw do
   get '/teams/:id/schedule', to: 'teams#schedule'
   get '/teams/:id/players', to: 'teams#players'
   #get '/teams/:id/positions', to: 'teams#profile'
-  get '/teams/:id/player_availabilites', to: 'teams#player_availabilities'
+  # get '/teams/:id/player_availabilites', to: 'teams#player_availabilities'
+  match '/teams/:id/player_availabilites', to: 'teams#player_availabilities', as: 'player_availabilities', via: 'get'
 
   resources :team_members
   resources :teams
   resources :team_member_availabilities
   resources :team_players
-  
+  resources :statistics
+
   get "static_pages/home"
   match '/calendar', to: 'calendar#index',  via: 'get'
   #match '/login', to: 'login#index',  via: 'get'
-resources :notes
-get 'notes/index'
+  resources :notes
+  get 'notes/index'
 
-get 'team_members/:id/note', to: 'team_members#note'
+  get 'team_members/:id/note', to: 'team_members#note'
+
+
+
+
+
+
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

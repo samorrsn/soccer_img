@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Team Players</div>
+    <div class="panel-heading"><h1>Team Players</h1></div>
     </div>
     <!-- Leaving the body panel of this table empty for now -->
     <div class="panel-body"></div>
@@ -12,21 +12,30 @@
             </tr>
         </thead>
         <tbody>
-          <% @team_players.each do |team_player| %>
+          <% @team.team_members.each do |team_member| %>
            <tr>
-             <td><p><%= team_player.member_first_name %></p></td>
-             <td><p><%= team_player.member_last_name %></p></td>
              <td>
-               <% team_player.positions.each do |position| %>
+               <p>
+                 <%= team_member.member_first_name %>
+                 <% if is_a_coach?(team_member) %>
+                    (Coach)
+                 <% end %>
+               </p>
+             </td>
+             <td><p><%= team_member.member_last_name %></p></td>
+             <td>
+               <% team_member.positions.each do |position| %>
                  <%= position.title %><br>
                <% end %>
              </td>
+
              <td>
-               <div id="profile-profile-btn" class="btn btn-xs" onClick="">Profile</div>
-               <div id="profile-edit-btn" class="btn btn-xs" onClick="makeVisible(<%= team_player.id %>);">Edit</div>
+               <div id="profile-edit-btn" class="btn btn-xs pull-right" onClick="makeVisible(<%= team_member.id %>);">Edit</div>
+               <div id="profile-profile-btn" class="btn btn-xs pull-right" onClick="">Profile</div>
              </td>
            </tr>
            <% end %>
         </tbody>
     </table>
+    <%= link_to 'New Player', new_team_member_path(team_id: @team.id), class: "btn btn-xs" %>
 </div>

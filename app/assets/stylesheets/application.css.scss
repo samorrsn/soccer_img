@@ -12,3 +12,15 @@
  *= require_tree .
  *= require fullcalendar
  */
+
+ .home-jumbotron{
+   width: 700px;
+   margin: 0 auto;
+   border: 2px solid darkblue;
+   border-radius: 10px;
+   padding: 5px;
+   box-shadow: -5px 5px 70px #888888;
+ }
+ .home-register-btn{
+   width: 660px;
+ }

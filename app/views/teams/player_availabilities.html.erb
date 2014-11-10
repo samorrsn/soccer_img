@@ -22,21 +22,21 @@
                     <td><p><%= team_member.member_last_name %></p></td>
                     <td>
                         <% team_member.team_member_availabilities.each do |availability| %>
-                            <% if availability.isAvailable %>
-                                <%= availability.date %><br>
+                            <% if availability.is_available %>
+                                <%= "#{availability.date.to_s(:long)} at #{availability.from_time.to_s(:time)}" %><br>
                             <% end %>
                         <% end %>
                     </td>
                     <td>
                         <% team_member.team_member_availabilities.each do |availability| %>
-                            <% if !availability.isAvailable %>
-                                <%= availability.date %><br>
+                            <% if !availability.is_available %>
+                                <%= "#{availability.date.to_s(:long)} at #{availability.till_time.to_s(:time)}" %><br>
                             <% end %>
                         <% end %>
                     </td>
                     <td>
                         <div class="btn btn-xs">Profile</div>
-                        <div class="btn btn-xs">Edit</div>
+                        <%= link_to 'Edit', new_team_member_availability_path(team_member_id: team_member.id), class: "btn" %>
                     </td>
                 </tr>
             <% end %>

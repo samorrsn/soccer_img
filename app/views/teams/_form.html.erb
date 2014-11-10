@@ -1,24 +1,46 @@
-<%= form_for(@team) do |f| %>
-  <% if @team.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+<style>
+body .modal {
+  /* new custom width */
+  width: 500px;
+  /* must be half of the width, minus scrollbar on the left (30px) */
+  margin-left: -250px;
+}
+input {
+  width: 457px;
+}
+</style>
 
-      <ul>
-      <% @team.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="text-center">Create New Team</h1>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@team,  html: { class: "form col-md-12" }, url: teams_path) do |f| %>
+          <% if @team.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+              <ul>
+                <% @team.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-  <div class="actions">
-
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-
-    <%= f.label :mascot %>
-    <%= f.text_field :mascot %>
-    <br>
-    <%= f.submit %>
-  </div>
-<% end %>
+          <div class="form-group">
+            <%= f.text_field :name, class: "form-control input-lg", placeholder:"Team Name" %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :mascot , class: "form-control input-lg", placeholder:"Mascot"%>
+          </div>
+          <div class="form-group" >
+            <%= f.submit "Create Team", class: "btn btn-primary" %>
+            <%= link_to 'Back', teams_path, class: "btn pull-right" %>
+          </div>
+       <% end %>
+     </div>
+   </div>
+ </div>
+</div>

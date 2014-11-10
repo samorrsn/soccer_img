@@ -1,19 +1,23 @@
-<h1><% if signed_in? %>
-My Teams
-<% else %>
-Listing Teams
-<% end %>
+<h1>
+  <% if signed_in? %>
+    My Teams
+  <% else %>
+    Listing Teams
+  <% end %>
 </h1>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Team Name</th>
-                <th>Mascot</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%= render @teams %>
-        </tbody>
-    </table>
+
+<table class="table table-hover table-team-list">
+    <thead>
+        <tr>
+            <th>Team Name</th>
+            <th>Mascot</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= render @teams %>
+    </tbody>
+</table>
+
 <br>
-<%= link_to 'New Team', new_team_path %>
+
+<%= link_to 'New Team', new_team_path, class: "btn btn-large btn-primary new-team-btn" %>

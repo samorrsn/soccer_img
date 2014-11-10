@@ -13,6 +13,7 @@ class TeamMembersController < ApplicationController
   # GET /team_members/new
   def new
     @team_member = TeamMember.new
+    @team_adding_id = params[:team_id]
   end
 
   # GET /team_members/1/edit
@@ -29,7 +30,8 @@ class TeamMembersController < ApplicationController
     @team_member = TeamMember.new(team_member_params)
 
     if @team_member.save
-      redirect_to @team_member, notice: 'Team member was successfully created.'
+      # redirect_to @team_member, notice: 'Team member was successfully created.'
+      redirect_to profile_path(@team_member.team_id), notice: 'Team member was successfully created.'
     else
       render action: 'new'
     end
@@ -64,7 +66,7 @@ class TeamMembersController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def team_member_params
-    params.require(:team_member).permit(:user_id, :team_id, :is_coach, :user_first_name, :user_last_name, :notes)
+    params.require(:team_member).permit(:user_id, :team_id, :member_first_name, :member_last_name, :notes)
   end
 
 end
