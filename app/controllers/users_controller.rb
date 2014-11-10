@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
+      @user.user_type="member"
       if @user.save
         sign_in @user
         # format.html { redirect_to @user, notice: 'User was successfully created.' }
