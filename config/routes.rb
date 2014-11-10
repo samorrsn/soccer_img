@@ -1,4 +1,6 @@
 STM::Application.routes.draw do
+  
+  resources :player_positions
   # get "team_member_availability/new"
   # get "team_member_availability/create"
   # get "team_member_availability/update"

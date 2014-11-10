@@ -29,7 +29,8 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @team_players = @team.team_players
     @notes = @team.notes
-
+    @player_positions_arr = Array.new()
+    @test = PlayerPosition.new
   end
 
   def player_availabilities
