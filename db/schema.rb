@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110165951) do
+ActiveRecord::Schema.define(version: 20141110183804) do
 
   create_table "events", force: true do |t|
     t.string   "type"
@@ -42,15 +42,6 @@ ActiveRecord::Schema.define(version: 20141110165951) do
 
   add_index "player_positions", ["position_id", "team_member_id"], name: "index_player_positions_on_position_id_and_team_member_id", unique: true
 
-  create_table "player_statistics", force: true do |t|
-    t.integer  "team_player_id"
-    t.integer  "statistic_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "player_statistics", ["team_player_id", "statistic_id"], name: "index_player_statistics_on_team_player_id_and_statistic_id"
-
   create_table "positions", force: true do |t|
     t.string   "title"
     t.datetime "created_at"
@@ -62,7 +53,10 @@ ActiveRecord::Schema.define(version: 20141110165951) do
     t.integer  "assists"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "team_player_id"
   end
+
+  add_index "statistics", ["team_player_id"], name: "index_statistics_on_team_player_id"
 
   create_table "team_member_availabilities", force: true do |t|
     t.integer  "team_member_id"
