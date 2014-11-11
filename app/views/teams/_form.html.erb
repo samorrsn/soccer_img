@@ -1,26 +1,32 @@
 <style>
-body .modal {
-  /* new custom width */
-  width: 500px;
-  /* must be half of the width, minus scrollbar on the left (30px) */
-  margin-left: -250px;
-}
-input {
-  width: 457px;
-}
+  body .modal {
+    /* new custom width */
+    width: 500px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    margin-left: -250px;
+  }
+  input {
+    width: 457px;
+  }
 </style>
-
 <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="text-center">Create New Team</h1>
+        <h1 class="text-center">
+          <% if @team.new_record? %>
+            Create New Team
+          <% else %>
+            Edit Team Settings
+          <% end %>
+        </h1>
       </div>
       <div class="modal-body">
-        <%= form_for(@team,  html: { class: "form col-md-12" }, url: teams_path) do |f| %>
+        <%= form_for(@team,  html: { class: "form col-md-12" }) do |f| %>
           <% if @team.errors.any? %>
             <div id="error_explanation">
-              <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+              <h2><%= pluralize(@team.errors.count, "error") %>
+                prohibited this team from being saved:</h2>
               <ul>
                 <% @team.errors.full_messages.each do |msg| %>
                   <li><%= msg %></li>
@@ -28,19 +34,27 @@ input {
               </ul>
             </div>
           <% end %>
-
           <div class="form-group">
             <%= f.text_field :name, class: "form-control input-lg", placeholder:"Team Name" %>
           </div>
           <div class="form-group">
             <%= f.text_field :mascot , class: "form-control input-lg", placeholder:"Mascot"%>
           </div>
+          <% if !@team.new_record? %>
+            <div class="form-group" >
+              <%= render 'position_add' %>
+            </div>
+          <% end %>
           <div class="form-group" >
-            <%= f.submit "Create Team", class: "btn btn-primary" %>
+            <% if @team.new_record? %>
+              <%= f.submit "Create Team", class: "btn btn-primary" %>
+            <% else %>
+              <%= f.submit "Submit Changes", class: "btn btn-primary" %>
+            <% end %>
             <%= link_to 'Back', teams_path, class: "btn pull-right" %>
           </div>
-       <% end %>
-     </div>
-   </div>
- </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

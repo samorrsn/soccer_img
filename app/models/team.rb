@@ -1,4 +1,5 @@
 class Team < ActiveRecord::Base
+
 	#attr_accessor :name, :mascot
 	validates :name, :mascot, presence: true
 	has_many :team_members
@@ -7,6 +8,15 @@ class Team < ActiveRecord::Base
 	has_many :team_players
 	has_many :team_coaches
 	has_many :notes
+	has_many :team_positions
+	has_many :positions, through: :team_positions
 	include ActiveModel::Conversion
 	extend  ActiveModel::Naming
+	after_create :add_defaults
+	def add_defaults
+		self.positions.create(title: 'Goalkeeper')
+		self.positions.create(title: 'Midfielder')
+		self.positions.create(title: 'Defender')
+		self.positions.create(title: 'Forward')
+	end
 end

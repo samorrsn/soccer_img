@@ -22,6 +22,7 @@ STM::Application.routes.draw do
   get '/teams/:id/profile', to: 'teams#profile'
   get '/teams/:id/schedule', to: 'teams#schedule'
   get '/teams/:id/players', to: 'teams#players'
+  get '/teams/:id/positions', to: 'teams#positions'
   #get '/teams/:id/positions', to: 'teams#profile'
   # get '/teams/:id/player_availabilites', to: 'teams#player_availabilities'
   match '/teams/:id/player_availabilites', to: 'teams#player_availabilities', as: 'player_availabilities', via: 'get'
@@ -31,6 +32,7 @@ STM::Application.routes.draw do
   resources :team_member_availabilities
   resources :team_players
   resources :statistics
+  resources :positions
 
   get "static_pages/home"
   match '/calendar', to: 'calendar#index',  via: 'get'
@@ -40,7 +42,10 @@ STM::Application.routes.draw do
 
   get 'team_members/:id/note', to: 'team_members#note'
 
-
+  resources :team_positions do
+    get :delete, :on => :member
+    delete :delete, :on => :member, :action => :destroy
+  end
 
 
 

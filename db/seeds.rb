@@ -4,11 +4,6 @@ User.create("first_name"=>"John", "last_name"=>"Doe", "user_type"=>"member", "em
 # Create Teams
 Team.create("name"=>"Tigers", "mascot"=>"Tiger")
 Team.create("name"=>"Sharks", "mascot"=>"Goldfish")
-# Currently this is a general position title list shared by all teams
-Position.create("title"=>"Goalkeeper")
-Position.create("title"=>"Defender")
-Position.create("title"=>"Mid-Fielder")
-Position.create("title"=>"Forward")
 # Create TeamMember 1
 TeamPlayer.create("team_id"=>1, "user_id"=>1, "member_first_name"=>"Johnathon", "member_last_name"=>"Doe")
 PlayerPosition.create("team_member_id"=>1, "position_id"=>1)

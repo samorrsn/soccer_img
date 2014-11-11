@@ -23,6 +23,8 @@ class TeamsController < ApplicationController
   # GET /teams/1/edit
   def edit
     @team = Team.find(params[:id])
+    @positions = @team.team_positions
+    @position = Position.new
   end
 
   def profile
@@ -52,7 +54,8 @@ class TeamsController < ApplicationController
 
   def positions
     @team = Team.find(params[:id])
-    @team_members = @team.team_members
+    @positions = @team.team_positions
+    @position = Position.new
   end
 
   def create
@@ -71,17 +74,29 @@ class TeamsController < ApplicationController
 
   # PATCH/PUT /teams/1
   def update
-    if @team.update(team_params)
-      redirect_to @team, notice: 'Team was successfully updated.'
+    if params[:commit] == 'Add New Position'
+      #@position = Position.find_or_create_by_title(params[:position][:title])
+      @team = Team.find_by_id(params[:position][:team_id])
+      @team.positions.create(title: params[:position][:title])
+      redirect_to :back, notice: "Position successfully created!"
     else
-      render action: 'edit'
+      if @team.update(team_params)
+        redirect_to @team, notice: 'Team was successfully updated.'
+      else
+        render action: 'edit'
+      end
     end
   end
 
   # DELETE /teams/1
   def destroy
-    @team.destroy
-    redirect_to teams_url, notice: 'Team was successfully destroyed.'
+    if params.has_key?(:team_position)
+      TeamPosition.find_by_id(params[:team_position]).destroy
+      redirect_to :back, notice: "Position successfully deleted!"
+    else
+      @team.destroy
+      redirect_to teams_url, notice: 'Team was successfully destroyed.'
+    end
   end
 
   private

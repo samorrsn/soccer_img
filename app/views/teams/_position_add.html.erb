@@ -1,0 +1,24 @@
+<table id="tbl-manage-position" class="table table-hover">
+  <thead>
+    <tr>
+      <th>Manage Positions</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @positions.each do |pos| %>
+      <tr>
+        <td>
+          <%= pos.position.title %>
+          <%= link_to 'Delete', team_path(team_position: pos),
+            :confirm => 'Are you sure?', :method => :delete, class: "btn pull-right" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= form_for(@position) do |fp| %>
+  <%= fp.text_field :title %>
+  <%= fp.submit "Add New Position" %>
+  <%= fp.hidden_field :team_id, value: @team.id %>
+<% end %>

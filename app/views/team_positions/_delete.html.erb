@@ -1,0 +1,8 @@
+<%= form_for(@team_position, :url => { :action => :destroy }, :html => { :method => :delete }) do |f| %>
+  <p>Are you sure you want to delete  '<%= @position.title %>'?</p>
+  
+  <div class="footer" id="dialog-form">
+    <%= link_to 'No', :back %>
+    <button type="submit">Yes &raquo;</button>
+  </div>
+<% end %>
