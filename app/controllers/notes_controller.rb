@@ -12,6 +12,9 @@ class NotesController < ApplicationController
 
   # GET /notes/new
   def new
+    @team_player_id = params[:team_player_id]
+    @team_player = TeamMember.find_by(id: @team_player_id)
+    @team_coach_id = params[:team_coach_id]
     @note = Note.new
   end
 

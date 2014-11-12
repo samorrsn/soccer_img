@@ -4,7 +4,7 @@ class Team < ActiveRecord::Base
 	validates :name, :mascot, presence: true
 	has_many :team_members
 	has_many :users, through: :team_members
-	has_many :team_member_availabilities
+	has_many :team_member_availabilities, through: :team_members
 	has_many :team_players
 	has_many :team_coaches
 	has_many :notes

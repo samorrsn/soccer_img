@@ -12,7 +12,7 @@ class TeamMemberAvailabilitiesController < ApplicationController
 
     # Haven't decided how correctly to finish this
     if @team_member_availability.save
-      redirect_to player_availabilities_path(id: @team_member_availability.team_member.team_id), notice: 'Availability was successfully added.'
+      redirect_to :back, notice: 'Availability was successfully added.'
     else
       redirect_to :back, notice: 'Availability was not added.'
     end
@@ -31,8 +31,16 @@ class TeamMemberAvailabilitiesController < ApplicationController
   end
 
   def destroy
-    @team_member_availability.destroy
+    if params.has_key?(:team_member_availability)
+      TeamAvailabilities.find_by_id(params[:team_position]).destroy
+      redirect_to :back, notice: "Availability successfully deleted!"
+    else
+      @team_member_availability.destroy
+      redirect_to teams_url, notice: 'Availability successfully destroyed.'
+    end
   end
+
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -42,6 +50,6 @@ class TeamMemberAvailabilitiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def team_member_availability_params
-      params.require(:team_member_availability).permit(:team_member_id, :is_available, :date, :from_time, :till_time)
+      params.require(:team_member_availability).permit(:team_member_id, :is_available, :from, :till)
     end
 end

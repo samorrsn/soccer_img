@@ -30,6 +30,8 @@ class TeamsController < ApplicationController
   def profile
     @team = Team.find(params[:id])
     @team_players = @team.team_members
+    # TODO: Fix this to get correct coach
+    @coach = TeamMember.find_by(team_id: params[:id], type: "TeamCoach")
     @notes = @team.notes
     @player_positions_arr = Array.new()
     @test = PlayerPosition.new
@@ -44,6 +46,16 @@ class TeamsController < ApplicationController
   def schedule
     @team = Team.find(params[:id])
     @team_members = @team.team_members
+
+    # TODO: Move this from the controller
+    @events = []
+    @team.team_member_availabilities.each do |e|
+      evt = Hash.new
+      evt[:title] = e.team_member.full_name
+      evt[:start] = e.from.to_s(:db).split(" ").first
+      @events << evt
+    end
+    @availability_events = @events.to_json
     @team_member_availability = TeamMemberAvailability.new
   end
 

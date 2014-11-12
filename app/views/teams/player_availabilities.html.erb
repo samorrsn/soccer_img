@@ -2,8 +2,8 @@
 <%= render 'header' %>
 
 <div class="panel panel-default">
-    <div class="panel-heading">Team Players</div>
-    </div>
+    <div class="panel-heading"></div>
+
     <!-- Leaving the body panel of this table empty for now -->
     <div class="panel-body"></div>
     <table class="table table-hover">
@@ -23,20 +23,20 @@
                     <td>
                         <% team_member.team_member_availabilities.each do |availability| %>
                             <% if availability.is_available %>
-                                <%= "#{availability.date.to_s(:long)} at #{availability.from_time.to_s(:time)}" %><br>
+                                <%= "#{availability.from.to_formatted_s(:short)} - #{availability.till.to_formatted_s(:short)}" %><br>
                             <% end %>
                         <% end %>
                     </td>
                     <td>
                         <% team_member.team_member_availabilities.each do |availability| %>
                             <% if !availability.is_available %>
-                                <%= "#{availability.date.to_s(:long)} at #{availability.till_time.to_s(:time)}" %><br>
+                                <%= "#{availability.from.to_formatted_s(:short)} - #{availability.till.to_formatted_s(:short)}" %><br>
                             <% end %>
                         <% end %>
                     </td>
                     <td>
-                        <div class="btn btn-xs">Profile</div>
-                        <%= link_to 'Edit', new_team_member_availability_path(team_member_id: team_member.id), class: "btn" %>
+                        <%= link_to 'Edit', new_team_member_availability_path(team_member_id: team_member.id), class: "btn pull-right" %>
+                        <div class="btn btn-xs pull-right">Profile</div>
                     </td>
                 </tr>
             <% end %>

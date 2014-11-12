@@ -3,30 +3,40 @@
 
 <%= render 'teams/team_member' %>
 
-<script>
-var forms=[];
-</script>
 
-<% @team_players.each do |team_player| %>
-<tr>
-	<td>
-		<div id="edit-positions-form-<%= team_player.id %>" class="edit-positions-form">
-			<script>
-				forms.push(<%= team_player.id %>)
-			</script>
+<div class="panel panel-default text-center">
+	<%# TODO: Update this form that was created before better understanding of the form builders %>
+	<script>
+	var forms=[];
+	</script>
 
-			<%= team_player.member_first_name %>
-			<%= team_player.member_last_name %>
+	<% @team_players.each do |team_player| %>
+	<tr>
+		<td>
+			<div id="edit-positions-form-<%= team_player.id %>" class="edit-positions-form">
+				<script>
+					forms.push(<%= team_player.id %>)
+				</script>
 
-			<%= form_for(@test) do |f| %>
-				<%= f.collection_select(:position_id, @team.positions, :id, :title) %>
-				<%= f.hidden_field :team_member_id, :value => team_player.id %>
-				<%= f.submit %>
-			<% end %>
-		</div>
-	</td>
-</tr>
-<% end %>
+				<strong>
+					<%= team_player.member_first_name %>
+					<%= team_player.member_last_name %>
+				</strong>
+
+				<%= form_for(@test) do |f| %>
+					<div class="form-group">
+						<%= f.hidden_field :team_member_id, :value => team_player.id %>
+						<%= f.collection_select(:position_id, @team.positions, :id, :title, class: "form-control") %>
+
+						<%= f.submit "Add Position", class: "btn btn-secondary form-btn-margin"%>
+					</div>
+				<% end %>
+			</div>
+		</td>
+	</tr>
+	<% end %>
+</div>
+
 
 <script>
 	for (var i=0; i<forms.length; i++){

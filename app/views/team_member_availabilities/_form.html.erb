@@ -1,0 +1,94 @@
+<style>
+body .modal {
+  /* new custom width */
+  width: 500px;
+  /* must be half of the width, minus scrollbar on the left (30px) */
+  margin-left: -250px;
+}
+input {
+  width: 457px;
+}
+</style>
+
+<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="text-center">Edit Availabilities</h1>
+      </div>
+      <div class="modal-header">
+        <div class="text-center">
+          <strong>
+            <%= @team_member.member_first_name %>
+            <%= @team_member.member_last_name %>
+          </strong>
+        </div>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+                <th>Availability</th>
+                <th>Date/Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @team_member.team_member_availabilities.each do |availability| %>
+              <tr>
+                <%# Availability %>
+                <th>
+                  <% if availability.is_available? %>
+                    Available
+                  <% else %>
+                    Unavailable
+                  <% end %>
+                </th>
+
+                <%# Date/Time %>
+                <th>
+                    <%= "#{availability.from.to_formatted_s(:short)} - #{availability.till.to_formatted_s(:short)}" %>
+                </th>
+                <%# Delete %>
+                <th>
+                  <%= link_to 'Delete', availability,
+                    :confirm => 'Are you sure?', :method => :delete, class: "btn pull-right" %>
+                </th>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-header">
+        <div class="text-center">
+          <strong>
+            New Availability
+          </strong>
+        </div>
+      </div>
+      <div class="modal-body">
+        <%= form_for(:team_member_availability,  html: { class: "form col-md-12" }, url: team_member_availabilities_path) do |f| %>
+          <div class="form-group">
+            <%= f.hidden_field :team_member_id, :value => @team_member.id %>
+          </div>
+          <div class="form-group">
+            <p>Check if you are available: <%= f.check_box :is_available, class: "form-control input-lg" %></p>
+          </div>
+          <div class="form-group">
+            <%# f.time_field :from_time , class: "form-control input-lg", placeholder:"hh:mm"%>
+            <%= f.label "From:" %>
+            <%= f.datetime_local_field :from , class: "form-control input-lg", placeholder:"hh:mm"%>
+          </div>
+          <div class="form-group">
+            <%# f.time_field :till_time , class: "form-control input-lg", placeholder:"hh:mm"%>
+            <%= f.label "Till:" %>
+            <%= f.datetime_local_field :till , class: "form-control input-lg", placeholder:"hh:mm"%>
+          </div>
+          <div class="form-group" >
+            <%= f.submit "Set Availability", class: "btn btn-secondary" %>
+          </div>
+       <% end %>
+       <%= link_to 'Done', player_availabilities_path(id: @team.id), class: "btn btn-primary btn-block link-btn-text-white" %>
+     </div>
+   </div>
+ </div>
+</div>

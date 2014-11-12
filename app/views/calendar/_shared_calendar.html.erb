@@ -2,7 +2,7 @@
     <!--
         Require that the page rendering this calendar contains a div of class populEvent
     -->
-    
+
     <div id='calendar'></div>
     <script>
         //hide the popup initially
@@ -23,10 +23,14 @@
                 //theme: true,
                 editable: true,
 
+                events: events,
+
                 dayClick: function(date, jsEvent, view) {
                     $(".popupEvent").show();
-
                 }
+
+
+
             });
 
         });

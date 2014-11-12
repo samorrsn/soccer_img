@@ -1,0 +1,36 @@
+<style>
+  body .modal {
+    /* new custom width */
+    width: 500px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    margin-left: -250px;
+  }
+  input {
+    width: 457px;
+  }
+</style>
+<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="text-center">
+          New Note
+        </h1>
+      </div>
+      <div class="modal-body">
+        <strong><%= @team_player.full_name %> Note:</strong>
+        <%= form_for(:notes,  html: { class: "form col-md-12" }) do |f| %>
+          <div class="form-group">
+            <%= f.hidden_field :team_player_id, class: "form-control input-lg", value: @team_player_id %>
+            <%= f.hidden_field :team_coach_id , class: "form-control input-lg", value: @team_coach_id %>
+            <%= f.text_area :note_text , class: "form-control input-lg", placeholder:"Note..." %>
+          </div>
+          <%= f.submit "Create Note", class: "btn btn-primary" %>
+        <% end %>
+
+        <%= link_to 'Done', teams_path, class: "btn btn-primary link-btn-text-white" %>
+
+      </div>
+    </div>
+  </div>
+</div>

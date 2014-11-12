@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110204140) do
+ActiveRecord::Schema.define(version: 20141112084055) do
 
   create_table "events", force: true do |t|
     t.string   "type"
@@ -61,9 +61,8 @@ ActiveRecord::Schema.define(version: 20141110204140) do
   create_table "team_member_availabilities", force: true do |t|
     t.integer  "team_member_id"
     t.boolean  "is_available"
-    t.date     "date"
-    t.time     "from_time"
-    t.time     "till_time"
+    t.datetime "from"
+    t.datetime "till"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

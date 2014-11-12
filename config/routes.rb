@@ -4,6 +4,15 @@ STM::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
+
+  
+  resources :team_member_availabilities do
+    get :delete, :on => :member
+    delete :delete, :on => :member, :action => :destroy
+  end
+
+
+
   root  'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/login',  to: 'sessions#new',         via: 'get'
@@ -29,7 +38,6 @@ STM::Application.routes.draw do
 
   resources :team_members
   resources :teams
-  resources :team_member_availabilities
   resources :team_players
   resources :statistics
   resources :positions

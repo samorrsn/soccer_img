@@ -1,29 +1,13 @@
 <%= provide(:title, @team.name) %>
 <%= render 'header' %>
 
+<script>
+  var events = <%= @availability_events.html_safe %>
+</script>
+
 <!-- Hidden until calendar event -->
 <div class="popupEvent">
-    <%= form_for(@team_member_availability) do |f| %>
-      <div class="actions">
-        <%= f.label :team_member %>
-        <%= f.collection_select(:team_member_id, TeamMember.all, :id, :full_name) %>
 
-        <%= f.label :is_available %>
-        <%= f.check_box :is_available %>
-
-        <%= f.label :date %>
-        <%= f.date_field :date %>
-
-        <%= f.label :from_time %>
-        <%= f.datetime_field :from_time %>
-
-        <%= f.label :till_time %>
-        <%= f.datetime_field :till_time %>
-
-        <br>
-        <%= f.submit %>
-      </div>
-    <% end %>
 </div>
 
 

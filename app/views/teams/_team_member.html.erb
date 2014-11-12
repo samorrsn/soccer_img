@@ -1,6 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading"><h1>Team Players</h1></div>
-    </div>
+    <!-- <div class="panel-heading"><h1>Team Members</h1></div> -->
     <!-- Leaving the body panel of this table empty for now -->
     <div class="panel-body"></div>
     <table class="table table-hover">
@@ -30,7 +29,8 @@
              </td>
 
              <td>
-               <div id="profile-edit-btn" class="btn btn-xs pull-right" onClick="makeVisible(<%= team_member.id %>);">Edit</div>
+               <div id="profile-edit-btn" class="btn btn-xs pull-right" onClick="makeVisible(<%= team_member.id %>);">Add Position</div>
+               <%= link_to 'Add Note', new_note_path(team_coach_id: @coach.id, team_player_id: team_member.id), class: "btn btn-xs pull-right", id: "profile-note-btn" %>
                <div id="profile-profile-btn" class="btn btn-xs pull-right" onClick="">Profile</div>
              </td>
            </tr>
