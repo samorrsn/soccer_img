@@ -33,4 +33,15 @@
 	background: url("delete.png") no-repeat 0 0;
 	margin-top: 8px;
 }
-.btn_delete:hover {cursor: pointer;}	 
+.btn_delete:hover {cursor: pointer;}
+
+.link-btn-text-white{
+  color: white;
+  &:visited {
+    color: white;
+  }
+  &:hover {
+    color: #fff;
+    background-color: #000;
+  }
+}

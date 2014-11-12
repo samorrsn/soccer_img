@@ -81,7 +81,7 @@ class TeamsController < ApplicationController
       redirect_to :back, notice: "Position successfully created!"
     else
       if @team.update(team_params)
-        redirect_to @team, notice: 'Team was successfully updated.'
+        redirect_to :back, notice: 'Team was successfully updated.'
       else
         render action: 'edit'
       end

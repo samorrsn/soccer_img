@@ -18,7 +18,7 @@
   </tbody>
 </table>
 <%= form_for(@position) do |fp| %>
-  <%= fp.text_field :title %>
-  <%= fp.submit "Add New Position" %>
+  <%= fp.text_field :title, placeholder:"New Position" %>
   <%= fp.hidden_field :team_id, value: @team.id %>
+  <%= fp.submit "Add New Position", class: "btn btn-secondary" %>
 <% end %>
