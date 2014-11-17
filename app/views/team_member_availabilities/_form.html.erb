@@ -1,14 +1,5 @@
-<style>
-body .modal {
-  /* new custom width */
-  width: 500px;
-  /* must be half of the width, minus scrollbar on the left (30px) */
-  margin-left: -250px;
-}
-input {
-  width: 457px;
-}
-</style>
+
+
 
 <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
@@ -66,7 +57,7 @@ input {
         </div>
       </div>
       <div class="modal-body">
-        <%= form_for(:team_member_availability,  html: { class: "form col-md-12" }, url: team_member_availabilities_path) do |f| %>
+        <%= form_for(:team_member_availability, url: team_member_availabilities_path) do |f| %>
           <div class="form-group">
             <%= f.hidden_field :team_member_id, :value => @team_member.id %>
           </div>
