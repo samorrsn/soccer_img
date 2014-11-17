@@ -9,10 +9,12 @@ STM::Application.routes.draw do
     resources :team_coaches
   end
   resources :positions
+  resources :team_member_availabilities
 
 match '/teams/:id/player_positions/:player_id', to: 'teams#player_positions', via: 'get'
-
-
+match '/teams/:id/schedule', to: 'teams#schedule', via: 'get', as: 'schedule'
+match '/teams/:id/player_availabilities', to: 'teams#player_availabilities', via: 'get', as: 'availabilities'
+match '/teams/:id/player_stats', to: 'teams#player_stats', via: 'get', as: 'player_stats'
 
   root  'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'

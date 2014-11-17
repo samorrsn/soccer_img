@@ -87,6 +87,10 @@ class TeamsController < ApplicationController
     end
   end
 
+  def player_stats
+    @team = Team.find(params[:id])
+  end
+
   # PATCH/PUT /teams/1
   def update
     if params[:commit] == 'Add New Position'
