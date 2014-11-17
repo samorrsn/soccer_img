@@ -3,13 +3,14 @@ STM::Application.routes.draw do
   resources :player_positions
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-
-
-  
-  resources :team_member_availabilities do
-    get :delete, :on => :member
-    delete :delete, :on => :member, :action => :destroy
+  resources :teams do
+    resources :team_members
+    resources :team_players
+    resources :team_coaches
   end
+  resources :positions
+
+match '/teams/:id/player_positions/:player_id', to: 'teams#player_positions', via: 'get'
 
 
 
@@ -18,43 +19,7 @@ STM::Application.routes.draw do
   match '/login',  to: 'sessions#new',         via: 'get'
   match '/logout', to: 'sessions#destroy',     via: 'delete'
 
-  match 'teams/:id/profile', to: 'teams#profile', as: 'profile', via: 'get'
-  get "team_members/new"
-  get "team_members/profile"
-  get "team_members/edit"
-  get "team_players/new"
-  get "team_players/profile"
-  get "team_players/edit"
-
-  # get "calendar/index"
-  get "statistics/index"
-  get '/teams/:id/profile', to: 'teams#profile'
-  get '/teams/:id/schedule', to: 'teams#schedule'
-  get '/teams/:id/players', to: 'teams#players'
-  get '/teams/:id/positions', to: 'teams#positions'
-  #get '/teams/:id/positions', to: 'teams#profile'
-  # get '/teams/:id/player_availabilites', to: 'teams#player_availabilities'
-  match '/teams/:id/player_availabilites', to: 'teams#player_availabilities', as: 'player_availabilities', via: 'get'
-
-  resources :team_members
-  resources :teams
-  resources :team_players
-  resources :statistics
-  resources :positions
-
-  get "static_pages/home"
-  match '/calendar', to: 'calendar#index',  via: 'get'
-  #match '/login', to: 'login#index',  via: 'get'
-  resources :notes
-  get 'notes/index'
-
-  get 'team_members/:id/note', to: 'team_members#note'
-
-  resources :team_positions do
-    get :delete, :on => :member
-    delete :delete, :on => :member, :action => :destroy
-  end
-
+ 
 
 
 
