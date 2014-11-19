@@ -1,38 +1,31 @@
-<h1>Editing team_member</h1>
-<% provide(:title, "Edit user") %>
-<h1>Edit player info</h1>
+<% provide(:title, "Edit team member") %>
+<h1>Edit team member information</h1>
 
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(@user) do |f| %>
      <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name %>
+      <%= f.label :member_first_name %>
+      <%= f.text_field :member_first_name %>
 
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name %>
+      <%= f.label :member_last_name %>
+      <%= f.text_field :member_last_name %>
 
-      <%= f.label :password %>
-      <%= f.text_field :password %>
+      <%= f.label :type %>
+      <%= f.text_field :type %>
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
+      <%= f.label :user_id %>
+      <%= f.text_field :user_id %>
 
-      <%= f.label :phone_number %>
-      <%= f.text_field :phone_number %>
+      <%= f.label :team_id %>
+      <%= f.text_field :team_id %>
 
-      <%= f.label :street_address %>
-      <%= f.text_field :street_address %>
+      <%= f.label :updated_at %>
+      <%= f.text_field :updated_at %>
 
-      <%= f.label :city %>
-      <%= f.text_field :city %>
-
-      <%= f.label :state %>
-      <%= f.text_field :state %>
-
-      <%= f.label :zipcode %>
-      <%= f.text_field :zipcode %>
+      <%= f.label :created_at %>
+      <%= f.text_field :created_at %>
 
       <%= link_to 'Edit player positions', teams_profile_path %> 
 
@@ -43,19 +36,5 @@
   </div>
 </div>
 
-<%= link_to 'Show', @team_member %> |
-<%= link_to 'Back', team_members_path %>
-
-
-<!-- <h2>Player Positions</h2>
-<%= form_for @team_member do -%>
-  <% Position.all.each do |position| -%>
-    <div>
-      <%= check_box_tag :position_ids, position.id, @team_member.positions.include?(position), :name => 'team_member[position_ids][]' -%>
-      <%= label_tag :position_ids, position.title -%>
-    </div>
-  <% end -%>
-  <%= submit_tag -%>
-<% end -%> -->
 <%= link_to 'Show', @team_member %> |
 <%= link_to 'Back', team_members_path %>
