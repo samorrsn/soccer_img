@@ -29,12 +29,13 @@ class TeamsController < ApplicationController
 
   def profile
     @team = Team.find(params[:id])
-    @team_players = @team.team_members
+    @team_players = @team.team_players
     # TODO: Fix this to get correct coach
     @coach = TeamMember.find_by(team_id: params[:id], type: "TeamCoach")
     @notes = @team.notes
     @player_positions_arr = Array.new()
     @test = PlayerPosition.new
+    @statistics = Statistic.all
   end
 
   def player_availabilities
