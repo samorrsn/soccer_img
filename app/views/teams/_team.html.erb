@@ -1,10 +1,11 @@
+
 <tr>
-  <td><p><%= team.name %></p></td>
-  <td><p><%= team.mascot %></p></td>
+  <td><%= team.name %></td>
+  <td><%= team.mascot %></td>
   <td>
     <% if is_coach?(team) %>
-      <%= link_to "Edit", edit_team_path(team), class: "btn btn-xs pull-right" %>
+      <%= link_to "Edit", edit_team_path(team), class: "btn btn-default pull-right" %>
     <% end %>
-    <%= link_to "Profile", profile_path(team), class: "btn btn-xs pull-right" %>
+    <%= link_to "Profile", team, class: "btn btn-default pull-right" %>
   </td>
 </tr>

@@ -19,6 +19,36 @@
     color: #fff;
   }
 }
-.table-team-list{
 
+body {
+    padding: 15px;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 5px;
+}
+
+thead th {
+  background-color: #006DCC;
+  color: white;
+}
+
+tbody td {
+  background-color: #EEEEEE;
+}
+
+tr {
+  td:first-child, th:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+  td:last-child, th:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+}
+input {
+  height:10px;
+  width: 100px;
 }

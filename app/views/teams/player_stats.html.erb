@@ -1,0 +1,22 @@
+<h1>Statistics#index</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Position</th>
+    <th>Goals</th>
+    <th>Assists</th>
+  </tr>
+ 
+<% @team.team_players.each do |user| %>
+  <tr>
+    <td><%= user.member_first_name %>  <%= user.member_last_name %></td>
+    <td><% user.positions.each do |position| %>
+      <%= position.title %>
+      <% end %>
+    </td>
+    <td><%= user.statistics.sum(:goals) %></td>
+    <td><%= user.statistics.sum(:assists) %></td>
+  </tr>
+<% end %>
+</table>

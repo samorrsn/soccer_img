@@ -13,6 +13,9 @@
  *= require fullcalendar
  */
 
+ @import "bootstrap-sprockets";
+@import "bootstrap";
+
  .home-jumbotron{
    width: 700px;
    margin: 0 auto;
@@ -48,4 +51,8 @@
 
 .form-btn-margin{
   margin-bottom: 10px !important;
+}
+
+.checkbox_container input {
+  display: inline;
 }

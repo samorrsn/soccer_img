@@ -1,0 +1,25 @@
+<h1>Listing team_players</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @team_players.each do |team_player| %>
+      <tr>
+        <td><%= link_to 'Show', team_team_player_path(@team, team_player) %></td>
+        <td><%= link_to 'Edit', edit_team_team_player_path(@team, team_player) %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Team player', new_team_team_player_path(@team, @team_player) %>

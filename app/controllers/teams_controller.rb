@@ -13,6 +13,9 @@ class TeamsController < ApplicationController
   # GET /teams/1
   def show
     @team = Team.find(params[:id])
+    @team_players = @team.team_players
+    @team_positions = @team.positions
+    @player_position = PlayerPosition.new
   end
 
   # GET /teams/new
@@ -83,6 +86,10 @@ class TeamsController < ApplicationController
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def player_stats
+    @team = Team.find(params[:id])
   end
 
   # PATCH/PUT /teams/1

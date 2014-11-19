@@ -1,4 +1,5 @@
-<p id="notice"><%= notice %></p>
+<%= provide(:title, @team.name) %>
+<%= render 'header' %>
 
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
+<%= render 'team_player' %>
+

@@ -10,6 +10,7 @@ class Team < ActiveRecord::Base
 	has_many :notes
 	has_many :team_positions
 	has_many :positions, through: :team_positions
+	has_many :statistics, through: :team_players
 	include ActiveModel::Conversion
 	extend  ActiveModel::Naming
 	after_create :add_defaults
