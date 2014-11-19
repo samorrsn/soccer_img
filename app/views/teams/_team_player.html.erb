@@ -8,7 +8,7 @@
   </td>
   <td>
     <div class="btn btn-xs">Profile</div>
-    <div class="btn btn-xs">Edit</div>
+    <td><%= link_to 'Edit', edit_team_member_path(team_member) %></td>
    
    
    <%= link_to "View Notes", {controller: 'team_members', action: 'note', id: team_player.id}, class: "btn btn-xs", :remote => true %>
