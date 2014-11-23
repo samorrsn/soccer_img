@@ -4,12 +4,16 @@ STM::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :teams do
+    
+    resources :events
     resources :team_members
     resources :team_players
     resources :team_coaches
   end
   resources :positions
   resources :team_member_availabilities
+resource :calendar, :only => [:show]
+resources :events
 
 match '/teams/:id/player_positions/:player_id', to: 'teams#player_positions', via: 'get'
 match '/teams/:id/schedule', to: 'teams#schedule', via: 'get', as: 'schedule'

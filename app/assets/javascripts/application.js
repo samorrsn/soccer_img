@@ -12,7 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+
 //= require bootstrap-sprockets
+//= require moment
+//= require bootstrap-datetimepicker
 //= require turbolinks
-//= require_tree .
+
+//= require jquery.rest
 //= require fullcalendar
+//= require fullcalendar/gcal
+//= require_tree .

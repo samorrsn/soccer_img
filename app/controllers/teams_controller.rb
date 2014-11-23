@@ -49,23 +49,18 @@ class TeamsController < ApplicationController
 
   def schedule
     @team = Team.find(params[:id])
-    @team_members = @team.team_members
+    @event = @team.events.new
 
-    # TODO: Move this from the controller
-    @events = []
-    @team.team_member_availabilities.each do |e|
-      evt = Hash.new
-      evt[:title] = e.team_member.full_name
-      evt[:start] = e.from.to_s(:db).split(" ").first
-      @events << evt
-    end
-    @availability_events = @events.to_json
-    @team_member_availability = TeamMemberAvailability.new
   end
 
   def players
     @team = Team.find(params[:id])
     @team_members = @team.team_members
+  end
+
+  def events
+    @team = Team.find(params[:id])
+    @event = Event.new
   end
 
   def positions

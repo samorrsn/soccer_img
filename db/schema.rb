@@ -11,17 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117155057) do
+ActiveRecord::Schema.define(version: 20141122212221) do
+
+  create_table "event_types", force: true do |t|
+    t.string "name"
+  end
 
   create_table "events", force: true do |t|
-    t.string   "type"
-    t.date     "date"
-    t.time     "time"
-    t.string   "opponent"
-    t.string   "location"
+    t.string   "title"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.boolean  "all_day"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "team_id"
+    t.string   "event_type"
   end
+
+  add_index "events", ["team_id"], name: "index_events_on_team_id"
 
   create_table "notes", force: true do |t|
     t.integer  "team_player_id"
@@ -60,7 +68,7 @@ ActiveRecord::Schema.define(version: 20141117155057) do
 
   create_table "team_member_availabilities", force: true do |t|
     t.integer  "team_member_id"
-    t.boolean  "is_available"
+    t.boolean  "isAvailable"
     t.datetime "from"
     t.datetime "till"
     t.datetime "created_at"

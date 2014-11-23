@@ -9,7 +9,7 @@
   </thead>
   <tbody>
     <% @team.team_players.each do |team_player| %>
-      <tr data-link="<%= edit_team_team_player_path(@team, team_player) %>">
+      <tr>
         <td>
           <%= team_player.member_first_name %>
         </td>

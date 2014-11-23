@@ -11,6 +11,8 @@ class Team < ActiveRecord::Base
 	has_many :team_positions
 	has_many :positions, through: :team_positions
 	has_many :statistics, through: :team_players
+	has_many :events
+
 	include ActiveModel::Conversion
 	extend  ActiveModel::Naming
 	after_create :add_defaults

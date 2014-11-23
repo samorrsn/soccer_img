@@ -1,14 +1,7 @@
 <%= provide(:title, @team.name) %>
-<%= render 'header' %>
-
-<script>
-  var events = <%= @availability_events.html_safe %>
-</script>
-
-<!-- Hidden until calendar event -->
-<div class="popupEvent">
-
-</div>
-
-
-<%= render 'calendar/shared_calendar' %>
+<div id='calendar'></div>
+<%= link_to "Add New Event", new_team_event_path(@team), remote: true, class: "btn btn-primary" %>
+<%= render "layouts/modal" %>
+<p>
+<%= render 'calendars/calendar' %>
+</p>

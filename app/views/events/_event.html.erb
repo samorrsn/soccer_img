@@ -1,0 +1,30 @@
+<%= form_for(@event) do |f| %>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class ="field">
+    <%= f.label "Event Type" %><br />
+    <%= f.select :event_type, options_for_select([["Game", "game"], ["Practice", "practice"]]) %>
+  </div>
+  <div class="field">
+    <%= f.label :starts_at %><br />
+    <%= f.datetime_select :starts_at, :minute_step => 15 %>
+  </div>
+  <div class="field">
+    <%= f.label :ends_at %><br />
+    <%= f.datetime_select :ends_at, :minute_step => 15 %>
+  </div>
+  <div class="field">
+    <%= f.label :all_day %><br />
+    <%= f.check_box :all_day %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  <%= f.hidden_field :team_id, value: @team.id %>
+<% end %>

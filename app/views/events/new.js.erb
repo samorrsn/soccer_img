@@ -1,0 +1,5 @@
+$('#reusableHeading').html("New Event");
+$('#reusableBody').html("<%= escape_javascript(render @event) %>");
+$('#reusableFooter').remove();
+$('#reusableModal').modal();
+
