@@ -13,10 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20141122212221) do
 
-  create_table "event_types", force: true do |t|
-    t.string "name"
-  end
-
   create_table "events", force: true do |t|
     t.string   "title"
     t.datetime "starts_at"
