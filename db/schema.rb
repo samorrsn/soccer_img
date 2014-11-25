@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122212221) do
+ActiveRecord::Schema.define(version: 20141125072726) do
 
   create_table "events", force: true do |t|
     t.string   "title"
@@ -67,6 +67,16 @@ ActiveRecord::Schema.define(version: 20141122212221) do
     t.boolean  "isAvailable"
     t.datetime "from"
     t.datetime "till"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "team_member_private_messages", force: true do |t|
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.text     "subject"
+    t.text     "body"
+    t.boolean  "is_read"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,5 +1,8 @@
 STM::Application.routes.draw do
 
+  get "team_member_private_message/new"
+  get "team_member_private_message/create"
+  get "team_member_private_message/destroy"
   resources :player_positions
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
