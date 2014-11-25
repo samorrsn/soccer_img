@@ -58,6 +58,11 @@ class TeamsController < ApplicationController
     @team_members = @team.team_members
   end
 
+  def member_messages
+    @team = Team.find(params[:id])
+    @messages = TeamMemberPrivateMessage.find(:all, conditions: {receiver_id: params[:member_id]})
+  end
+
   def events
     @team = Team.find(params[:id])
     @event = Event.new

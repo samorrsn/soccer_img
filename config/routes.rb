@@ -7,7 +7,7 @@ STM::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :teams do
-    
+
     resources :events
     resources :team_members
     resources :team_players
@@ -23,13 +23,16 @@ match '/teams/:id/schedule', to: 'teams#schedule', via: 'get', as: 'schedule'
 match '/teams/:id/player_availabilities', to: 'teams#player_availabilities', via: 'get', as: 'availabilities'
 match '/teams/:id/player_stats', to: 'teams#player_stats', via: 'get', as: 'player_stats'
 match '/teams/:id/player_availabilites', to: 'teams#player_availabilities', as: 'player_availabilities', via: 'get'
+match '/teams/:id/member_messages/:member_id', to: 'teams#member_messages', via: 'get'
 
-  root  'static_pages#home'
-  match '/signup',  to: 'users#new',            via: 'get'
-  match '/login',  to: 'sessions#new',         via: 'get'
-  match '/logout', to: 'sessions#destroy',     via: 'delete'
+match '/team_member_private_message/:id', to: 'team_member_private_message#get_message', via: 'get'
 
- 
+root  'static_pages#home'
+match '/signup',  to: 'users#new',            via: 'get'
+match '/login',  to: 'sessions#new',         via: 'get'
+match '/logout', to: 'sessions#destroy',     via: 'delete'
+
+
 
 
 
