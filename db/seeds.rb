@@ -4,6 +4,7 @@ User.create("first_name"=>"John", "last_name"=>"Doe", "email"=>"john@doe.com", "
 # Create Teams
 Team.create("name"=>"Tigers", "mascot"=>"Tiger")
 Team.create("name"=>"Sharks", "mascot"=>"Goldfish")
+
 # Create TeamMember 1
 TeamPlayer.create("team_id"=>1, "user_id"=>1, "member_first_name"=>"Johnathon", "member_last_name"=>"Doe")
 PlayerPosition.create("team_player_id"=>1, "position_id"=>1)
@@ -11,9 +12,11 @@ PlayerPosition.create("team_player_id"=>1, "position_id"=>2)
 # TeamMemberAvailability.create("team_player_id"=>1, "is_available"=>true, "date"=>Date.new(2014, 11, 5), "from_time"=>"10:30", "till_time"=>"11:45")
 # TeamMemberAvailability.create("team_player_id"=>1, "is_available"=>true, "date"=>Date.new(2014, 11, 10), "from_time"=>"5:15", "till_time"=>"15:10")
 # TeamMemberAvailability.create("team_player_id"=>1, "is_available"=>false, "date"=>Date.new(2014, 11, 15), "from_time"=>"9:10", "till_time"=>"13:05")
+
 # Create TeamMember 2
 TeamPlayer.create("team_id"=>1, "user_id"=>nil, "member_first_name"=>"Justin", "member_last_name"=>"Kase")
 PlayerPosition.create("team_player_id"=>2, "position_id"=>1)
+
 # Create TeamMember 3
 TeamPlayer.create("team_id"=>1, "user_id"=>nil, "member_first_name"=>"Tearzov", "member_last_name"=>"Joy")
 PlayerPosition.create("team_player_id"=>3, "position_id"=>3)
@@ -22,12 +25,19 @@ PlayerPosition.create("team_player_id"=>3, "position_id"=>4)
 PlayerPosition.create("team_player_id"=>3, "position_id"=>1)
 # TeamMemberAvailability.create("team_player_id"=>1, "is_available"=>false, "date"=>Date.new(2014, 11, 28), "from_time"=>"2:45", "till_time"=>"6:20")
 # TeamMemberAvailability.create("team_player_id"=>1, "is_available"=>false, "date"=>Date.new(2014, 11, 7), "from_time"=>"10:30", "till_time"=>"18:30")
+
 # Create TeamMember 4
 TeamPlayer.create("team_id"=>2, "user_id"=>nil, "member_first_name"=>"Joe", "member_last_name"=>"Beast")
 PlayerPosition.create("team_player_id"=>4, "position_id"=>1)
 PlayerPosition.create("team_player_id"=>4, "position_id"=>2)
 # Create TeamCoach
 TeamCoach.create("team_id"=>2, "user_id"=>1, "member_first_name"=>"John", "member_last_name"=>"Doe")
+
+# Create TeamMemberPrivateMessages
+TeamMemberPrivateMessage.create(sender_id: 2, receiver_id: 1, subject: "Practice Reminder", body: "Don't forget to bring an extra bad to practice.", is_read: false)
+TeamMemberPrivateMessage.create(sender_id: 3, receiver_id: 1, subject: "Game Canceles", body: "Thursday's game is canceled.", is_read: false)
+TeamMemberPrivateMessage.create(sender_id: 2, receiver_id: 1, subject: "My Stuff", body: "Are you bringing my stuff to practice?", is_read: false)
+
 # Create Notes
 Note.create("team_player_id"=>2, "team_coach_id"=>1, "note_text"=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus sem at ipsum bibendum, sed congue arcu auctor. Praesent id ante congue purus mattis pretium. Vestibulum in turpis quam. Aenean vitae ultricies lectus. Morbi bibendum fermentum porta. In tincidunt hendrerit nulla, ut vulputate augue sollicitudin quis. Sed sollicitudin urna quis aliquam laoreet. Integer accumsan lacus turpis, vel molestie ex venenatis et. Nullam tincidunt iaculis augue, a porta justo volutpat quis. Donec pharetra ipsum sit amet risus sodales, sed facilisis nulla commodo. Mauris libero lacus, tempus eu varius quis, euismod vitae magna. Sed dignissim orci neque. Integer convallis sapien velit, eget commodo velit sollicitudin in. Curabitur vitae elit rutrum, egestas neque non, sollicitudin justo. Maecenas ipsum diam, sagittis sed lectus sit amet, maximus viverra enim. Aliquam sed ultrices eros, non pellentesque leo.
 

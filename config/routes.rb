@@ -25,6 +25,8 @@ match '/teams/:id/player_stats', to: 'teams#player_stats', via: 'get', as: 'play
 match '/teams/:id/player_availabilites', to: 'teams#player_availabilities', as: 'player_availabilities', via: 'get'
 match '/teams/:id/member_messages/:member_id', to: 'teams#member_messages', via: 'get'
 
+# Used only as a json response, will either change or add a redirect for http from this route.
+#       Use teams route to see team_member messages.
 match '/team_member_private_message/:id', to: 'team_member_private_message#get_message', via: 'get'
 
 root  'static_pages#home'
