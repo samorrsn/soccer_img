@@ -1,5 +1,11 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :profile,
+      :player_availabilities, :schedule, :players, :member_messages, :events,
+      :positions, :player_stats]
+  before_action :set_current_team_member, only: [:show, :profile,
+      :player_availabilities, :schedule, :players, :member_messages, :events,
+      :positions, :player_stats]
+
 
   # GET /teams
   def index
@@ -12,7 +18,6 @@ class TeamsController < ApplicationController
 
   # GET /teams/1
   def show
-    @team = Team.find(params[:id])
     @team_players = @team.team_players
     @team_positions = @team.positions
     @player_position = PlayerPosition.new
@@ -25,13 +30,11 @@ class TeamsController < ApplicationController
 
   # GET /teams/1/edit
   def edit
-    @team = Team.find(params[:id])
     @positions = @team.team_positions
     @position = Position.new
   end
 
   def profile
-    @team = Team.find(params[:id])
     @team_players = @team.team_players
     # TODO: Fix this to get correct coach
     @coach = TeamMember.find_by(team_id: params[:id], type: "TeamCoach")
@@ -42,34 +45,27 @@ class TeamsController < ApplicationController
   end
 
   def player_availabilities
-    @team = Team.find(params[:id])
     @team_members = @team.team_members
     @team_member_availability = TeamMemberAvailability.new
   end
 
   def schedule
-    @team = Team.find(params[:id])
     @event = @team.events.new
-
   end
 
   def players
-    @team = Team.find(params[:id])
     @team_members = @team.team_members
   end
 
   def member_messages
-    @team = Team.find(params[:id])
     @messages = TeamMemberPrivateMessage.find(:all, conditions: {receiver_id: params[:member_id]})
   end
 
   def events
-    @team = Team.find(params[:id])
     @event = Event.new
   end
 
   def positions
-    @team = Team.find(params[:id])
     @positions = @team.team_positions
     @position = Position.new
   end
@@ -89,7 +85,6 @@ class TeamsController < ApplicationController
   end
 
   def player_stats
-    @team = Team.find(params[:id])
   end
 
   # PATCH/PUT /teams/1
@@ -123,6 +118,10 @@ class TeamsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_team
     @team = Team.find(params[:id])
+  end
+
+  def set_current_team_member
+    @current_team_member = TeamMember.where(team_id: params[:id], user_id: current_user.id)
   end
 
   # Only allow a trusted parameter "white list" through.

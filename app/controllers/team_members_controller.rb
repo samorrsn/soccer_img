@@ -31,7 +31,7 @@ class TeamMembersController < ApplicationController
 
     if @team_member.save
       # redirect_to @team_member, notice: 'Team member was successfully created.'
-      redirect_to profile_path(@team_member.team_id), notice: 'Team member was successfully created.'
+      redirect_to team_path(@team_member.team_id), notice: 'Team member was successfully created.'
     else
       render action: 'new'
     end
@@ -56,6 +56,17 @@ class TeamMembersController < ApplicationController
   def note
     @team_member = TeamMember.find(params[:id])
     @notes = @team_member.notes
+  end
+
+  def add_user
+      # TODO: Add error checking to this code and fix the redirects
+      @team_member = TeamMember.find(params[:team_member][:code])
+      @team_member.user_id = current_user.id
+      if @team_member.update(team_member_params)
+        redirect_to root_path, notice: 'Team member was successfully updated.'
+      else
+        redirect_to :Back, notice: 'Team member was not successfully updated.'
+      end
   end
 
   private

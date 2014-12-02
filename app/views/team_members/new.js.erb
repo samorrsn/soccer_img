@@ -1,0 +1,4 @@
+$('#reusableHeading').html("New Team Member");
+$('#reusableBody').html("<%= escape_javascript(render @team_member) %>");
+$('#reusableFooter').remove();
+$('#reusableModal').modal();

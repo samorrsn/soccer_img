@@ -1,0 +1,8 @@
+<h3>Enter Team Member Code</h3>
+<%= form_for :team_member, url: "addUserToMemeber", html: {class: "nifty_form"} do |f| %>
+  <div class="field">
+      <%= f.label "Code" %>
+      <%= f.text_field :code, class: "form-control input-lg", placeholder:"Code..." %>
+  </div>
+  <%= f.submit "Enter Code", class: "btn btn-large btn-primary" %>
+<% end %>

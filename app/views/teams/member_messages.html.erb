@@ -10,72 +10,73 @@
 
 
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Inbox</h3>
-  </div>
-
-  <%#
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Inbox</h3>
+    </div>
+    <%#
     TODO:
       Message panel should be hidden till subject is clicked.
-  %>
+    %>
 
-  <div class="row">
-		<div class="col-md-6">
-      <%# Inbox Buttons %>
-      <div class="btn-group" role="group" aria-label="Inbox Buttons">
-        <button type="button" class="btn btn-default" aria-label="New Message">
-          <span class="glyphicon glyphicon-envelope" aria-hidden="true">
-        </button>
-        <button type="button" class="btn btn-default" aria-label="First page">
-          <span class="glyphicon glyphicon-fast-backward" aria-hidden="true">
-        </button>
-        <button type="button" class="btn btn-default" aria-label="Previous Page">
-          <span class="glyphicon glyphicon-step-backward" aria-hidden="true">
-        </button>
-        <button type="button" class="btn btn-default" aria-label="Next Page">
-          <span class="glyphicon glyphicon-step-forward" aria-hidden="true">
-        </button>
-        <button type="button" class="btn btn-default" aria-label="Last Page">
-          <span class="glyphicon glyphicon-fast-forward" aria-hidden="true">
-        </button>
-      </div>
-    </div>
+    <%# Buttons Row %>
+    <div class="row">
+        <div class="col-md-6">
+            <%# Inbox Buttons %>
+            <div class="btn-group" role="group" aria-label="Inbox Buttons">
+                <button type="button" class="btn btn-default" aria-label="New Message">
+                    <span class="glyphicon glyphicon-envelope" aria-hidden="true">
+                </button>
+                <button type="button" class="btn btn-default" aria-label="First page">
+                    <span class="glyphicon glyphicon-fast-backward" aria-hidden="true">
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Previous Page">
+                    <span class="glyphicon glyphicon-step-backward" aria-hidden="true">
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Next Page">
+                    <span class="glyphicon glyphicon-step-forward" aria-hidden="true">
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Last Page">
+                    <span class="glyphicon glyphicon-fast-forward" aria-hidden="true">
+                </button>
+            </div>
+        </div>
 
 		<div class="col-md-6">
-      <%# Message Buttons %>
-      <div id="message-btns" class="btn-group pull-right" role="group" aria-label="Inbox Buttons">
-        <button type="button" class="btn btn-default" aria-label="Last Page">
-          <span class="glyphicon glyphicon-remove" aria-hidden="true">
-        </button>
-      </div>
+            <%# Message Buttons %>
+            <div id="message-btns" class="btn-group pull-right" role="group" aria-label="Inbox Buttons">
+                <button type="button" class="btn btn-default" aria-label="Last Page">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true">
+                </button>
+            </div>
 		</div>
 	</div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <%# Inbox Messages %>
-      <ul class="list-group">
-        <% @messages.each do |message| %>
-          <!-- <a href="/team_member_private_message/1"> -->
-          <li class="list-group-item inbox-item" onclick="show_message(<%= message.id %>);">
-            <% unless message.is_read %>
-              <span class="badge">Unread</span>
-            <% end %>
-            <%= message.subject %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+    <%# Message List and Message Display Row %>
+    <div class="row">
+        <div class="col-md-6">
+            <%# Inbox Messages %>
+            <ul class="list-group">
+                <% @messages.each do |message| %>
+                    <!-- <a href="/team_member_private_message/1"> -->
+                    <li class="list-group-item inbox-item" onclick="show_message(<%= message.id %>);">
+                        <%# If the message isn't read, add an unread tag %>
+                        <% unless message.is_read %>
+                            <span class="badge">Unread</span>
+                        <% end %>
+                        <%= message.subject %>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
 
-    <%# Message Display %>
-    <div class="col-md-6">
-      <p><strong>From: </strong><span  id="from-text">Cool Dude</span></p>
-      <p><strong>Subject: </strong><span  id="subject-text">Test Subject</span></p>
-      <strong>Body: </strong>
-      <p><span id="body-text">Test Body</span></p>
+        <%# Message Display %>
+        <div class="col-md-6">
+            <p><strong>From: </strong><span  id="from-text">From...</span></p>
+            <p><strong>Subject: </strong><span  id="subject-text">Subject...</span></p>
+            <strong>Body: </strong>
+            <p><span id="body-text">Body...</span></p>
+        </div>
     </div>
-  </div>
-
 </div>
 
 <%#
