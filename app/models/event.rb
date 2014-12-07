@@ -12,16 +12,24 @@ class Event < ActiveRecord::Base
       :id => self.id,
       :title => self.title,
       :description => self.description || "",
-      :start => starts_at.iso8601,
-      :end => ends_at.iso8601,
+      :start => starts_at.rfc822,
+      :end => ends_at.rfc822,
       :allDay => self.all_day,
       :recurring => false,
-
+      :backgroundColor => bgColor
 
       #:url => Rails.application.routes.url_helpers.team_event_path(self.team, self.id),
       #:color => "red"
     }
 
+  end
+
+  def bgColor
+    if self.event_type == 'game'
+      'red'
+    else
+      'blue'
+    end
   end
 
   def self.format_date(date_time)

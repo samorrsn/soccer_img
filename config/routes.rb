@@ -15,7 +15,6 @@ STM::Application.routes.draw do
     resources :positions
     resources :team_member_availabilities
     resource :calendar, :only => [:show]
-    resources :events
     resources :team_members
 
     match '/teams/:id/player_positions/:player_id', to: 'teams#player_positions', via: 'get'

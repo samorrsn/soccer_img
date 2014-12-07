@@ -12,3 +12,11 @@
 	width: 900px;
 	margin: 0 auto;
 }
+
+.fc-event {
+	border: 1px solid #3a87ad; /* default BORDER color */
+	background-color: 'red'; /* default BACKGROUND color */
+	color: #fff;               /* default TEXT color */
+	font-size: .85em;
+	cursor: default;
+}

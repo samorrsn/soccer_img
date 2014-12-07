@@ -59,13 +59,13 @@ class EventsController < ApplicationController
   def create
     if params[:team_id]
 
-      event = @team.events.create(event_params)
+      @event = @team.events.create(event_params)
     else
-      @event = Event.create(event_params)
+      @event = Event.create(params[:event])
     end
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, :notice => 'Event was successfully created.' }
+        format.html { redirect_to [@team, @event], :notice => 'Event was successfully created.' }
         format.json { render :json => @event, :status => :created, :location => @event }
       else
         format.html { render :action => "new" }
@@ -77,11 +77,11 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.json
   def update
-    @event = Event.find(params[:id])
+    @event = @team.events.find_by_id(params[:id])
 
     respond_to do |format|
-      if @event.update_attributes(params(:event))
-        format.html { redirect_to @event, :notice => 'Event was successfully updated.' }
+      if @event.update_attributes(event_params)
+        format.html { redirect_to [@team, @event], :notice => 'Event was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }

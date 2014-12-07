@@ -9,7 +9,6 @@ $(document).ready ->
     height: 500,
     slotMinutes: 30,
 
-
     eventSources: [{
       url: './events',
     }],
@@ -24,25 +23,22 @@ $(document).ready ->
       updateEvent(event);
 
     eventClick: (event, jsEvent, view) ->
-      $("#modalTitle").html event.title
-      $("#startTime").html moment(event.start).format('MMM Do h:mm A')
-      $("#endTime").html moment(event.end).format('MMM Do h:mm A')
-      $("#eventDescription").html event.description
-      $("#fullCalModal").modal()
-      false  if event.url
+      showEventDetails(event);
 
-       
     
 
 updateEvent = (the_event) ->
-  $.update "/events/" + the_event.id,
+  $.update "./events/" + the_event.id,
     event:
       title: the_event.title,
-      starts_at: "" + the_event.start,
-      ends_at: "" + the_event.end,
+      starts_at: "" + moment(the_event.start).format('YYYY-MM-DD hh:mm'),
+      ends_at: "" + moment(the_event.end).format('YYYY-MM-DD hh:mm'),
       description: the_event.description
 
-
-
-
+showEventDetails = (the_event) ->
+  $("#modalTitle").html event.title
+  $("#startTime").html moment(event.start).format('MMM Do h:mm A')
+  $("#endTime").html moment(event.end).format('MMM Do h:mm A')
+  $("#eventDescription").html  "<%= escape_javascript( '123') %>"
+  $("#fullCalModal").modal()
   
