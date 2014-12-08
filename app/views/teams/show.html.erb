@@ -2,3 +2,6 @@
 <%= render 'header' %>
 
 <%= render 'team_player' %>
+<% if session[:back] %>
+    <%= link_to "Back >>", session[:back] %>
+<% end %>

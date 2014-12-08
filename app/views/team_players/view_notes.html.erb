@@ -1,21 +1,38 @@
-<% @notes.each do |note| %>
-  <div class="container">
-    <div class="row clearfix">
-      <div class="col-md-12 column">
-        <div class="row clearfix">
-          <div class="col-md-6 column">
-            Created:
-            <%= note.created_at %>
-          </div>
-          <div class="col-md-6 column">
-          </div>
-        </div>
-        <div class="jumbotron">
-          <%= note.note_text %>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
 <%= link_to 'New Note', new_team_player_note_path(@team_player), remote: true, class: "btn btn-default" %>
 <%= render "layouts/modal" %>
+<%= link_to 'Back', team_path(@team_player.team), class: "btn btn-default" %>
+<table class="table table-hover">
+  <tbody>
+    <% @notes.each do |note| %>
+      <tr>
+        <td>
+          <div class="container">
+            <div class="row clearfix">
+              <div class="col-md-12 column">
+                <div class="row clearfix">
+                  <div class="col-md-9 column">
+                    <p>
+                      Created:
+                      <%= note.created_at %>
+                    </p>
+                    <div id="testedit">
+                      <%= best_in_place note, :note_text, :path => team_player_note_path(@team_player, note),:type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel', :activator => "#note-#{note.id}" %>
+                    </div>
+                  </div>
+                  <div class="col-md-3 column">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default" id="<%= "note-#{note.id}" %>">Edit Note</button>
+                    </div>
+                    <div class="btn-group">
+                      <%= link_to 'Delete Note', team_player_note_path(@team_player, note), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -11,7 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+//= require best_in_place
 //= require jquery_ujs
+
+//= require jquery-ui
+//= require best_in_place.jquery-ui
 
 //= require bootstrap-sprockets
 //= require moment

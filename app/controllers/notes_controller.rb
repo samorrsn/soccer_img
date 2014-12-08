@@ -1,6 +1,12 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
   before_filter :get_team_player
+  before_filter :return_to
+
+  def return_to
+    session[:return_to] ||= request.referer
+  end
+
   def get_team_player
     @team_player = TeamPlayer.find(params[:team_player_id])
   end
@@ -30,7 +36,7 @@ class NotesController < ApplicationController
     @note = @team_player.notes.create(note_params)
 
     if @note.save
-       flash[:success] = 'Note was successfully created.'
+      flash[:success] = 'Note was successfully created.'
       redirect_to session.delete(:return_to)
     else
       render action: 'new'
@@ -39,17 +45,22 @@ class NotesController < ApplicationController
 
   # PATCH/PUT /notes/1
   def update
-    if @note.update(note_params)
-      redirect_to @note, notice: 'Note was successfully updated.'
+    respond_to do |format|
+        format.html
+        format.json { respond_with_bip(@note) }
+      end
     else
-      render action: 'edit'
-    end
+     respond_to do |format|
+       format.html { render :action => "edit" }
+       format.json { respond_with_bip(@note) }
+     end
   end
 
   # DELETE /notes/1
   def destroy
     @note.destroy
-    redirect_to notes_url, notice: 'Note was successfully destroyed.'
+    flash[:success] = 'Not was successfully deleted.'
+    redirect_to session.delete(:return_to)
   end
 
   private

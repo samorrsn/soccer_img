@@ -1,8 +1,19 @@
 <%= form_for([@team_player, @note]) do |f| %>
-  <div class="field">
-      <%= f.text_area :note_text,:size => "60x5", placeholder:"Enter Note Text Here"%>
-  </div>
-  <div class="actions">
-    <%= f.submit "Add Note", class: "btn btn-primary" %>
+  <div class="container">
+    <div class="row clearfix">
+      <div class="col-md-6 column">
+        <div class="panel"><%= f.text_area :note_text, class: "form-control", placeholder:"Note Text"%></div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-md-6 column">
+        <div class="btn-group">
+          <%= f.submit "Save", class: "btn btn-primary" %>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>
