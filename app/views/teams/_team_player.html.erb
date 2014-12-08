@@ -1,31 +1,68 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Positions</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @team.team_players.each do |team_player| %>
+<div class="panel panel-default">
+  <!-- <div class="panel-heading"><h1>Team Members</h1></div> -->
+  <!-- Leaving the body panel of this table empty for now -->
+  <div class="panel-body"></div>
+  <% if @team.team_coaches.count > 0 %>
+  <table class="table table-hover">
+    <thead>
       <tr>
-        <td>
-          <%= team_player.member_first_name %>
-        </td>
-        <td>
-          <%= team_player.member_last_name %>
-        </td>
-        <td>
-          <% team_player.positions.each do |position| %>
-            <%= position.title %><br>
-          <% end %>
-        </td>
-        <td>
-          <div><%= link_to 'Edit Player', edit_team_team_player_path(@team, team_player), class: "btn btn-default", remote: true %></div>
-        </td>
+        <th>Coach</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= render "layouts/modal" %>
+    </thead>
+    <tbody>
+       <% @team.team_coaches.each do |team_coach| %>
+      <td>
+        <%= team_coach.full_name %>
+      </td>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Positions</th>
+        <th>Player Notes</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @team.team_players.each do |team_player| %>
+        <tr>
+          <td>
+            <p>
+              <%= team_player.member_first_name %>
+
+            </p>
+          </td>
+          <td><p><%= team_player.member_last_name %></p></td>
+          <td>
+            <% team_player.positions.each do |position| %>
+              <%= position.title %><br>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to 'Add Note', new_team_player_note_path(team_player), remote: true, class: "btn btn-default" %>
+            <% if has_notes(team_player) %>
+              <%= link_to 'View Notes', view_notes_path(team_player), class: "btn btn-default" %>
+            <% end %>
+          </td>
+          <td>
+            <div><%= link_to 'Edit Player', edit_team_team_player_path(@team, team_player), class: "btn btn-default", remote: true %></div>
+          </td>
+            <%# link_to 'Add Note', new_note_path(team_coach_id: @coach.id, team_player_id: team_player.id), class: "btn btn-xs pull-right", id: "profile-note-btn" %>
+            <td>
+            <div id="profile-profile-btn" class="btn btn-default" onClick="">Profile</div>
+
+            <%# link_to 'Edit Info', edit_team_player_path(team_player), class: "btn btn-xs pull-right", id:"edit-profile-btn"%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'New Member', new_team_team_player_path(@team), remote: true, class: "btn btn-default" %>
+  <%= render "layouts/modal" %>
+</div>

@@ -1,10 +1,14 @@
 class TeamMemberAvailabilitiesController < ApplicationController
   before_action :set_team_member_availability, only: [:update, :edit, :destroy]
+  before_action :get_team_player, only: [:new]
+
+  def get_team_player
+    @team_player = TeamMember.find(params[:team_player_id])
+  end
 
   def new
     @team_member_availability = TeamMemberAvailability.new
-    @team_member = TeamMember.find(params[:team_member_id])
-    @team = Team.find(@team_member.team_id)
+    @team = Team.find(@team_player.team_id)
   end
 
   def create
@@ -21,9 +25,9 @@ class TeamMemberAvailabilitiesController < ApplicationController
   def update
     # Haven't decided how corectly to finish this
     if @team_member_availability.update(team_member_availability_params)
-      redirect_to @team_member, notice: 'Availability was successfully updated.'
+      redirect_to @team_player, notice: 'Availability was successfully updated.'
     else
-      redirect_to @team_member, notice: 'Availability was not updated.'
+      redirect_to @team_player, notice: 'Availability was not updated.'
     end
   end
 
@@ -40,16 +44,16 @@ class TeamMemberAvailabilitiesController < ApplicationController
     end
   end
 
-  
+
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_team_member_availability
-      @team_member_availability = TeamMemberAvailability.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_team_member_availability
+    @team_member_availability = TeamMemberAvailability.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def team_member_availability_params
-      params.require(:team_member_availability).permit(:team_member_id, :is_available, :from, :till)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def team_member_availability_params
+    params.require(:team_member_availability).permit( :isAvailable, :from, :till, :team_player_id)
+  end
 end

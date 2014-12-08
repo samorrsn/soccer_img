@@ -21,6 +21,7 @@ class TeamsController < ApplicationController
     @team_players = @team.team_players
     @team_positions = @team.positions
     @player_position = PlayerPosition.new
+
   end
 
   # GET /teams/new
@@ -45,7 +46,7 @@ class TeamsController < ApplicationController
   end
 
   def player_availabilities
-    @team_members = @team.team_members
+    @team_players = @team.team_players
     @team_member_availability = TeamMemberAvailability.new
   end
 

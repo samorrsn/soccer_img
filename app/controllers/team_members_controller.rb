@@ -1,7 +1,18 @@
 class TeamMembersController < ApplicationController
   before_action :set_team_member, only: [:show, :edit, :update, :destroy]
-
+  before_filter :get_team, except: :view_notes
   # GET /team_members
+
+  def get_team
+    @team = Team.find(params[:team_id])
+  end
+
+  def view_notes
+    @team_member = TeamMember.find(params[:id])
+    @team_player = @team_member
+    @notes = @team_member.notes
+  end
+
   def index
     @team_members = TeamMember.all
   end
@@ -27,11 +38,12 @@ class TeamMembersController < ApplicationController
 
   # POST /team_members
   def create
-    @team_member = TeamMember.new(team_member_params)
+    @team_member = @team.team_members.create(team_member_params)
 
     if @team_member.save
       # redirect_to @team_member, notice: 'Team member was successfully created.'
-      redirect_to team_path(@team_member.team_id), notice: 'Team member was successfully created.'
+      flash[:success] = 'Team member was successfully created.'
+      redirect_to @team
     else
       render action: 'new'
     end
@@ -59,14 +71,14 @@ class TeamMembersController < ApplicationController
   end
 
   def add_user
-      # TODO: Add error checking to this code and fix the redirects
-      @team_member = TeamMember.find(params[:team_member][:code])
-      @team_member.user_id = current_user.id
-      if @team_member.update(team_member_params)
-        redirect_to root_path, notice: 'Team member was successfully updated.'
-      else
-        redirect_to :Back, notice: 'Team member was not successfully updated.'
-      end
+    # TODO: Add error checking to this code and fix the redirects
+    @team_member = TeamMember.find(params[:team_member][:code])
+    @team_member.user_id = current_user.id
+    if @team_member.update(team_member_params)
+      redirect_to root_path, notice: 'Team member was successfully updated.'
+    else
+      redirect_to :Back, notice: 'Team member was not successfully updated.'
+    end
   end
 
   private

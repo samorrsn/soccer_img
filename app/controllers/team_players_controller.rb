@@ -1,9 +1,15 @@
 class TeamPlayersController < ApplicationController
   before_action :set_team_player, only: [:show, :edit, :update, :destroy]
-  before_filter :get_team
+  before_filter :get_team, only: [:create, :new, :edit]
+
   # GET /team_players
   def index
     @team_players = TeamPlayer.all
+  end
+
+  def view_notes
+    @team_player = TeamPlayer.find(params[:id])
+    @notes = @team_player.notes
   end
 
   def get_team
@@ -16,6 +22,7 @@ class TeamPlayersController < ApplicationController
 
   # GET /team_players/new
   def new
+    session[:return_to] ||= request.referer
     @team_player = TeamPlayer.new
   end
 
@@ -26,10 +33,11 @@ class TeamPlayersController < ApplicationController
 
   # POST /team_players
   def create
-    @team_player = TeamPlayer.new(team_player_params)
+    @team_player = @team.team_players.create(team_player_params)
 
     if @team_player.save
-      redirect_to @team_player, notice: 'Team player was successfully created.'
+       flash[:success] = 'Team player was successfully created.'
+      redirect_to session.delete(:return_to)
     else
       render action: 'new'
     end
@@ -37,6 +45,7 @@ class TeamPlayersController < ApplicationController
 
   # PATCH/PUT /team_players/1
   def update
+    @team_player = TeamPlayer.find(params[:id])
     if @team_player.update(team_player_params)
       redirect_to session.delete(:return_to)
     else
@@ -58,6 +67,6 @@ class TeamPlayersController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
  def team_player_params
-    params.require(:team_player).permit(:member_first_name, :positions, :team_id, :position_ids => [])
+    params.require(:team_player).permit(:member_first_name, :member_last_name, :positions, :team_id, :position_ids => [])
   end
 end

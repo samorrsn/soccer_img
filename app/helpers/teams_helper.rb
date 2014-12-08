@@ -8,4 +8,9 @@ module TeamsHelper
 		team_member.type == "TeamCoach"
 	end
 
+	def has_notes(team_member)
+		team_member.notes.count > 0
+	end
+
+
 end

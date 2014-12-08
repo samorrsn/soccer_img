@@ -7,7 +7,7 @@ class Team < ActiveRecord::Base
 	has_many :team_member_availabilities, through: :team_members
 	has_many :team_players
 	has_many :team_coaches
-	has_many :notes
+	has_many :notes, through: :team_players
 	has_many :team_positions
 	has_many :positions, through: :team_positions
 	has_many :statistics, through: :team_players

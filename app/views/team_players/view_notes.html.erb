@@ -1,0 +1,21 @@
+<% @notes.each do |note| %>
+  <div class="container">
+    <div class="row clearfix">
+      <div class="col-md-12 column">
+        <div class="row clearfix">
+          <div class="col-md-6 column">
+            Created:
+            <%= note.created_at %>
+          </div>
+          <div class="col-md-6 column">
+          </div>
+        </div>
+        <div class="jumbotron">
+          <%= note.note_text %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= link_to 'New Note', new_team_player_note_path(@team_player), remote: true, class: "btn btn-default" %>
+<%= render "layouts/modal" %>

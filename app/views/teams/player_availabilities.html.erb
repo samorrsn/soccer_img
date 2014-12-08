@@ -14,26 +14,26 @@
       </tr>
     </thead>
     <tbody>
-      <% @team_members.each do |team_member| %>
+      <% @team_players.each do |team_player| %>
         <tr>
-          <td><p><%= team_member.member_first_name %></p></td>
-          <td><p><%= team_member.member_last_name %></p></td>
+          <td><p><%= team_player.member_first_name %></p></td>
+          <td><p><%= team_player.member_last_name %></p></td>
           <td>
-            <% team_member.team_member_availabilities.each do |availability| %>
-              <% if availability.is_available %>
+            <% team_player.team_member_availabilities.each do |availability| %>
+              <% if availability.isAvailable? %>
                 <%= "#{availability.from.to_formatted_s(:short)} - #{availability.till.to_formatted_s(:short)}" %><br>
               <% end %>
             <% end %>
           </td>
           <td>
-            <% team_member.team_member_availabilities.each do |availability| %>
-              <% if !availability.is_available %>
+            <% team_player.team_member_availabilities.each do |availability| %>
+              <% if !availability.isAvailable? %>
                 <%= "#{availability.from.to_formatted_s(:short)} - #{availability.till.to_formatted_s(:short)}" %><br>
               <% end %>
             <% end %>
           </td>
           <td>
-            <%= link_to 'Edit', new_team_member_availability_path(team_member_id: team_member.id), class: "btn pull-right" %>
+            <%= link_to 'Edit', new_team_member_availability_path(team_player_id: team_player.id), class: "btn pull-right" %>
             <div class="btn btn-xs pull-right">Profile</div>
           </td>
         </tr>

@@ -1,45 +1,52 @@
 <div class="panel panel-default">
-    <!-- <div class="panel-heading"><h1>Team Members</h1></div> -->
-    <!-- Leaving the body panel of this table empty for now -->
-    <div class="panel-body"></div>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Positions</th>
-            </tr>
-        </thead>
-        <tbody>
-          <% @team.team_members.each do |team_member| %>
-           <tr>
-             <td>
-               <p>
-                 <%= team_member.member_first_name %>
-                 <% if is_a_coach?(team_member) %>
-                    (Coach)
-                 <% end %>
-               </p>
-             </td>
-             <td><p><%= team_member.member_last_name %></p></td>
-                <td>
-                    <%# unless is_a_coach?(team_member) %>
-                        <%# team_member.positions.each do |position| %>
-                            <%# position.title %><br>
-                        <%# end %>
-                    <%# end %>
-                </td>
-
-             <td>
-               <div id="profile-edit-btn" class="btn btn-default pull-right" onClick="makeVisible(<%= team_member.id %>);">Add Position</div>
-               <%# link_to 'Add Note', new_note_path(team_coach_id: @coach.id, team_player_id: team_member.id), class: "btn btn-xs pull-right", id: "profile-note-btn" %>
-               <div id="profile-profile-btn" class="btn btn-default pull-right" onClick="">Profile</div>
-               <%# link_to 'Edit Info', edit_team_member_path(team_member), class: "btn btn-xs pull-right", id:"edit-profile-btn"%>
-             </td>
-           </tr>
-           <% end %>
-        </tbody>
+  <!-- <div class="panel-heading"><h1>Team Members</h1></div> -->
+  <!-- Leaving the body panel of this table empty for now -->
+  <div class="panel-body"></div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Positions</th>
+        <th>Player Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @team.team_members.each do |team_member| %>
+        <tr>
+          <td>
+            <p>
+              <%= team_member.member_first_name %>
+              <% if is_a_coach?(team_member) %>
+                (Coach)
+              <% end %>
+            </p>
+          </td>
+          <td><p><%= team_member.member_last_name %></p></td>
+          <td>
+            <%# unless is_a_coach?(team_member) %>
+            <%# team_member.positions.each do |position| %>
+              <%# position.title %><br>
+              <%# end %>
+              <%# end %>
+            </td>
+            <td>
+              <% if has_notes(team_member) %>
+                 <%= link_to 'View and Add Notes', view_notes_path(@team, team_member), class: "btn btn-default" %>
+              <% else %>
+                <%= link_to 'Add Note', new_team_member_note_path(team_member), remote: true, class: "btn btn-default" %>
+              <% end %>
+            </td>
+            <td>
+              <div id="profile-edit-btn" class="btn btn-default pull-right" onClick="makeVisible(<%= team_member.id %>);">Add Position</div>
+              <%# link_to 'Add Note', new_note_path(team_coach_id: @coach.id, team_player_id: team_member.id), class: "btn btn-xs pull-right", id: "profile-note-btn" %>
+              <div id="profile-profile-btn" class="btn btn-default pull-right" onClick="">Profile</div>
+              <%# link_to 'Edit Info', edit_team_member_path(team_member), class: "btn btn-xs pull-right", id:"edit-profile-btn"%>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
-    <%= link_to 'New Member', new_team_team_member_path(team_id: @team.id), remote: true, class: "btn btn-default" %>
+    <%= link_to 'New Member', new_team_team_member_path(@team), remote: true, class: "btn btn-default" %>
     <%= render "layouts/modal" %>
-</div>
+  </div>

@@ -1,6 +1,9 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-
+  before_filter :get_team_player
+  def get_team_player
+    @team_player = TeamPlayer.find(params[:team_player_id])
+  end
   # GET /notes
   def index
     @notes = Note.all
@@ -8,12 +11,12 @@ class NotesController < ApplicationController
 
   # GET /notes/1
   def show
+    @notes = @team_member.notes
   end
 
   # GET /notes/new
   def new
-    @team_player_id = params[:team_player_id]
-    @team_player = TeamMember.find_by(id: @team_player_id)
+    session[:return_to] ||= request.referer
     @team_coach_id = params[:team_coach_id]
     @note = Note.new
   end
@@ -24,10 +27,11 @@ class NotesController < ApplicationController
 
   # POST /notes
   def create
-    @note = Note.new(note_params)
+    @note = @team_player.notes.create(note_params)
 
     if @note.save
-      redirect_to @note, notice: 'Note was successfully created.'
+       flash[:success] = 'Note was successfully created.'
+      redirect_to session.delete(:return_to)
     else
       render action: 'new'
     end
@@ -49,13 +53,13 @@ class NotesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_note
-      @note = Note.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_note
+    @note = Note.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def note_params
-      params[:note]
-    end
+  # Only allow a trusted parameter "white list" through.
+  def note_params
+    params.require(:note).permit(:note_text, :team_player_id)
+  end
 end
