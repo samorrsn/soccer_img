@@ -33,6 +33,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'fullcalendar-rails', '~>2.2.0'
 gem 'momentjs-rails'
 gem "best_in_place"
+gem 'bootstrap3-datetimepicker-rails', '~> 3.1.3'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

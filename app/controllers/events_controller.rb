@@ -1,6 +1,11 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_filter :get_team
+  before_filter :return_to
+
+  def return_to
+    session[:return_to] ||= request.referer
+  end
 
   # GET /events
   # GET /events.json
@@ -40,18 +45,13 @@ class EventsController < ApplicationController
   # GET /events/new.json
   def new
 
-      @event = Event.new
- 
+    @event = Event.new
+
   end
 
   # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])
-
-    respond_to do |format|
-      format.html { render :partial => "form" }
-      format.js { render :partial => "form" }
-    end
+    @event = @team.events.find(params[:id])
   end
 
   # POST /events
@@ -63,15 +63,15 @@ class EventsController < ApplicationController
     else
       @event = Event.create(params[:event])
     end
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to [@team, @event], :notice => 'Event was successfully created.' }
-        format.json { render :json => @event, :status => :created, :location => @event }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @event.errors, :status => :unprocessable_entity }
-      end
+
+    if @event.save
+      flash[:success] = 'Event was successfully created.'
+      redirect_to session.delete(:return_to)
+    else
+      format.html { render :action => "new" }
+      format.json { render :json => @event.errors, :status => :unprocessable_entity }
     end
+
   end
 
   # PUT /events/1
@@ -81,7 +81,8 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.update_attributes(event_params)
-        format.html { redirect_to [@team, @event], :notice => 'Event was successfully updated.' }
+        flash[:success] = 'Event was successfully updated.'
+        format.html { redirect_to session.delete(:return_to)}
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
@@ -96,10 +97,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.destroy
 
-    respond_to do |format|
-      format.html { redirect_to events_url }
-      format.json { head :no_content }
-    end
+    flash[:success] = 'Event was deleted.'
+    redirect_to session.delete(:return_to)
   end
 
   private

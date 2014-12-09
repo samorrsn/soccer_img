@@ -1,8 +1,8 @@
-$('#reusableHeading').html("New Event");
+$('#fullCalModal').removeClass("fade").modal("hide");
+$('#reusableHeading').html("Edit");
 $('#reusableBody').html("<%= escape_javascript(render @event) %>");
 $('#reusableFooter').remove();
 $('#reusableModal').modal();
-
 
 $(function () {
     $('#datetimepicker9').datetimepicker();

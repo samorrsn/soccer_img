@@ -36,9 +36,12 @@ updateEvent = (the_event) ->
       description: the_event.description
 
 showEventDetails = (the_event) ->
-  $("#modalTitle").html event.title
+  $("#modalTitle").html the_event.title
   $("#startTime").html moment(event.start).format('MMM Do h:mm A')
   $("#endTime").html moment(event.end).format('MMM Do h:mm A')
-  $("#eventDescription").html  "<%= escape_javascript( '123') %>"
+  $("#eventDescription").html the_event.description
+  $("#eventFooter").html '<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>'
+  $("#eventFooter").append  "<a class='btn btn-info' data-remote='true' id='test' href='./events/#{the_event.id}/edit'>Edit Event</a>"
+  $("#eventFooter").append  "<a class='btn btn-danger' data-confirm='Are you sure?' data-method='delete' href='./events/#{the_event.id}' rel='nofollow'>Delete Event</a>"
   $("#fullCalModal").modal()
   
