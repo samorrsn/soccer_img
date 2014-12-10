@@ -16,6 +16,7 @@
 //= require jquery.rest
 //= require moment
 //= require turbolinks
+//= require owl.carousel
 //= require bootstrap-sprockets
 //= require bootstrap-datetimepicker
 //= require best_in_place

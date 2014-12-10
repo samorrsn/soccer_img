@@ -11,11 +11,14 @@
  *= require_self
  *= require_tree .
  *= require fullcalendar
+ *= require owl.carousel
+ *= require owl.theme
  */
 
 @import "bootstrap-sprockets";
 @import 'bootstrap';
 @import 'bootstrap-datetimepicker';
+
 
  .home-jumbotron{
    width: 700px;
@@ -60,4 +63,13 @@
 
 .select-field input{
   border: 2px solid darkblue;
+}
+
+#owl-carousel .item {
+  margin: 3px;
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 }

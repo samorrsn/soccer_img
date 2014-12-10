@@ -1,0 +1,8 @@
+
+<h1>Team Images</h1>
+<%= render 'image_carousel' %>
+
+
+<br>
+<%= link_to 'Team Profile', @team, class: "btn btn-primary" %>
+<%= link_to 'Upload New Image', new_team_team_image_path, class: "btn btn-primary", remote: true %>

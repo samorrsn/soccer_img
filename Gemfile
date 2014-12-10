@@ -34,6 +34,8 @@ gem 'fullcalendar-rails', '~>2.2.0'
 gem 'momentjs-rails'
 gem "best_in_place"
 gem 'bootstrap3-datetimepicker-rails', '~> 3.1.3'
+gem 'carrierwave'
+gem 'owlcarousel-rails'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

@@ -1,0 +1,20 @@
+<%= form_for [@team,@team_image], html: { multipart: true } do |f| %>
+  <div class="container">
+    <div class="row clearfix">
+      <div class="col-md-6 column">
+        <div class="panel"><%= f.label "Image File" %>
+          <%= f.file_field :image %></div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-md-6 column">
+        <div class="btn-group">
+          <%= f.submit "Save", class: "btn btn-primary" %>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

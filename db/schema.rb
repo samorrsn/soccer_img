@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141208072904) do
+ActiveRecord::Schema.define(version: 20141209214508) do
 
   create_table "events", force: true do |t|
     t.string   "title"
@@ -33,10 +33,9 @@ ActiveRecord::Schema.define(version: 20141208072904) do
     t.text     "note_text"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "team_member_id"
   end
 
-  add_index "notes", ["team_member_id"], name: "index_notes_on_team_member_id"
+  add_index "notes", ["team_player_id"], name: "index_notes_on_team_player_id"
 
   create_table "player_positions", force: true do |t|
     t.datetime "created_at"
@@ -62,6 +61,15 @@ ActiveRecord::Schema.define(version: 20141208072904) do
   end
 
   add_index "statistics", ["team_player_id"], name: "index_statistics_on_team_player_id"
+
+  create_table "team_images", force: true do |t|
+    t.integer  "team_id"
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "team_images", ["team_id"], name: "index_team_images_on_team_id"
 
   create_table "team_member_availabilities", force: true do |t|
     t.integer  "team_member_id"
@@ -112,6 +120,7 @@ ActiveRecord::Schema.define(version: 20141208072904) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "positions",  default: "---\n- Goalkeeper\n- Forward\n- Defender\n- Benchwarmer\n"
+    t.string   "avatar"
   end
 
   create_table "users", force: true do |t|

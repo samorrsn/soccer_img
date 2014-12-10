@@ -7,5 +7,6 @@
 <%= link_to "Schedule", schedule_path(@team), class: "btn btn-default", id: "team-profile-top-btn" %>
 <%= link_to "View Availabilities", availabilities_path(@team), class: "btn btn-default",id: "team-profile-top-btn" %>
 <%= link_to "View Statistics", player_stats_path(@team), class: "btn btn-default",id: "team-profile-top-btn" %>
+<%= link_to "View Team Images", team_team_images_path(@team, @team.team_images), class: "btn btn-default",id: "team-profile-top-btn" %>
 <%# TODO: Fix this path %>
 <%= link_to "My Private Messages", "/teams/#{@team.id}/member_messages/6", class: "btn btn-default",id: "team-profile-top-btn" %>

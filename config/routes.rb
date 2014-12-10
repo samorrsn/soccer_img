@@ -12,6 +12,7 @@ STM::Application.routes.draw do
     resources :team_players
     resources :team_coaches
     resources :team_member_availabilities
+    resources :team_images
   end
   resources :positions
   resources :team_member_availabilities
