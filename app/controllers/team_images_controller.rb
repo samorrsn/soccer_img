@@ -27,7 +27,7 @@ class TeamImagesController < ApplicationController
 
     if @team_image.save
       flash[:success] = "The image has been uploaded."
-      redirect_to session.delete(:return_to)
+      redirect_to team_team_images_path(@team)
     else
       render "new"
     end
@@ -37,7 +37,7 @@ class TeamImagesController < ApplicationController
     @team_image = TeamImage.find(params[:id])
     @team_image.destroy
     flash[:success] = "The image has been deleted."
-    redirect_to session.delete(:return_to)
+    redirect_to team_team_images_path(@team)
   end
 
   private

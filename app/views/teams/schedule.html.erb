@@ -2,6 +2,7 @@
 <div id='calendar'>
 <div id = "event_desc_dialog" class="dialog" style ="display:none;"></div>
 </div>
+<%= link_to "Team Profile", team_path,  class: "btn btn-primary" %>
 <%= link_to "Add New Event", new_team_event_path(@team), remote: true, class: "btn btn-primary" %>
 <%= render "layouts/modal" %>
 <p>
