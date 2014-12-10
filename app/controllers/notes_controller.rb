@@ -45,15 +45,16 @@ class NotesController < ApplicationController
 
   # PATCH/PUT /notes/1
   def update
+
     respond_to do |format|
+      if @note.update(note_params)
         format.html
         format.json { respond_with_bip(@note) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@note) }
       end
-    else
-     respond_to do |format|
-       format.html { render :action => "edit" }
-       format.json { respond_with_bip(@note) }
-     end
+    end
   end
 
   # DELETE /notes/1
