@@ -1,0 +1,25 @@
+<h1>Listing player_images</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @player_images.each do |player_image| %>
+      <tr>
+        <td><%= link_to 'Show', player_image %></td>
+        <td><%= link_to 'Edit', edit_player_image_path(player_image) %></td>
+        <td><%= link_to 'Destroy', player_image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Player image', new_player_image_path %>

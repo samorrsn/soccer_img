@@ -22,6 +22,7 @@ STM::Application.routes.draw do
 
   resources :team_players do
     resources :notes
+    resources :player_images
   end
   
   match 'team_players/:id/view_notes', to: 'team_players#view_notes', via: 'get', as: 'view_notes'

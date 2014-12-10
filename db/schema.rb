@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209214508) do
+ActiveRecord::Schema.define(version: 20141210033524) do
 
   create_table "events", force: true do |t|
     t.string   "title"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 20141209214508) do
   end
 
   add_index "notes", ["team_player_id"], name: "index_notes_on_team_player_id"
+
+  create_table "player_images", force: true do |t|
+    t.integer  "team_player_id"
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "player_images", ["team_player_id"], name: "index_player_images_on_team_player_id"
 
   create_table "player_positions", force: true do |t|
     t.datetime "created_at"

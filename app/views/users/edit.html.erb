@@ -1,8 +1,8 @@
 <% provide(:title, "Edit user") %>
 <h1 align="center">Edit player info</h1>
 
-<div class="row" align="center">
-  <div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 vcenter">
     <%= form_for(@user) do |f| %>
      <%= render 'shared/error_messages', object: f.object %>
 
