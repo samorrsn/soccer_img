@@ -21,7 +21,7 @@ class TeamsController < ApplicationController
     @team_players = @team.team_players
     @team_positions = @team.positions
     @player_position = PlayerPosition.new
-
+    @team_images = @team.team_images
   end
 
   # GET /teams/new
