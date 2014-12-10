@@ -120,7 +120,6 @@ ActiveRecord::Schema.define(version: 20141209214508) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "positions",  default: "---\n- Goalkeeper\n- Forward\n- Defender\n- Benchwarmer\n"
-    t.string   "avatar"
   end
 
   create_table "users", force: true do |t|
